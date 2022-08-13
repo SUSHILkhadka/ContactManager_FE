@@ -21,6 +21,9 @@ export const BasicLayout = () => {
         <NavLink style={Styling} to={"/contact/list"}>
           List My Contacts
         </NavLink>
+        <NavLink style={Styling} to={"/logout"}>
+          logout
+        </NavLink>
         <NavLink style={Styling} to={"/login"}>
           Login
         </NavLink>

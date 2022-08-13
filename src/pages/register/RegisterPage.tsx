@@ -1,11 +1,10 @@
-import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import RegisterForm from "../../components/register/RegisterForm";
 
 export const RegisterPage = () => {
 
   return (
     <div>
-      Register Page
+      <RegisterForm/>
     </div>
   );
 };

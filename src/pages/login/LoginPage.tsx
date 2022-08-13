@@ -1,12 +1,9 @@
-import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
-
+import LoginForm from "../../components/login/LoginForm";
 export const LoginPage = () => {
 
   return (
     <div>
-      email:
-      password:
+      <LoginForm/>
     </div>
   );
 };
