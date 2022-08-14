@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { makeLoggedInWithInfo } from '../../redux_toolkit/slices/authSlice';
 import { login } from '../../services/backendCallUser';
-import { saveLoginResponse, setLogStatus } from '../../services/localStorage';
+import { saveAccessToken, saveLoginResponse, saveRefreshToken, setLogStatus } from '../../services/localStorage';
 
 const LoginForm: React.FC = () => {
     const navigate=useNavigate();
@@ -27,6 +27,8 @@ const LoginForm: React.FC = () => {
           dispatch(makeLoggedInWithInfo(response));
   
           saveLoginResponse(JSON.stringify(response));
+          saveAccessToken(response.accessToken);
+          saveRefreshToken(response.refreshToken);
           setLogStatus(true);
           console.log('ffff ')
           navigate('/about');

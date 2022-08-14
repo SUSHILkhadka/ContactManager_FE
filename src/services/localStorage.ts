@@ -19,3 +19,21 @@ export function getLoginResponse(): any {
       localStorage.setItem('LogStatus', '');
     }
   }
+
+  export function saveAccessToken(response: string){
+    localStorage.setItem('accessToken',response)
+}
+
+export function getAccessToken(): any {
+    const obj = localStorage.getItem('accessToken');
+    return obj ? obj : '';
+  }
+
+  export function saveRefreshToken(response: string){
+    localStorage.setItem('refreshToken',response)
+}
+
+export function getRefreshToken(): any {
+    const obj = localStorage.getItem('refreshToken');
+    return obj ? obj : '';
+  }

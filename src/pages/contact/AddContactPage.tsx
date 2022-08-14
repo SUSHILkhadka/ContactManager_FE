@@ -1,11 +1,10 @@
-import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import AddContactForm from "../../components/contact/AddContactForm";
 
 export const AddContactPage = () => {
 
   return (
     <div>
-      contact form
+      <AddContactForm/>
     </div>
   );
 };
