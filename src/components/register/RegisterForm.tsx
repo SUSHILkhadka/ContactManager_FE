@@ -1,8 +1,8 @@
 import { Button, Form, Input, message } from 'antd';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login, register } from '../../services/backendCallUser';
-
+import {  register } from '../../services/backendCallUser';
+import "../../App.css"
 const RegisterForm: React.FC = () => {
     const navigate=useNavigate();
 
@@ -15,8 +15,6 @@ const RegisterForm: React.FC = () => {
   
       try {
         const response = await register(body);
-        console.log('register response', response);
-  
         if (!response.data) {
           message.error(`${response.message}`);
         } else {
@@ -62,6 +60,7 @@ const RegisterForm: React.FC = () => {
       </Form.Item>
 
       <Form.Item
+      // className='passworfield'
         label="Password"
         name="password"
         rules={[{ required: true, message: 'Please input your password!' }]}
@@ -71,14 +70,15 @@ const RegisterForm: React.FC = () => {
 
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" className='btn'>
           Register
         </Button>
+      <Button onClick={handleClick} >Already has account??<span className="hyperlink">Login</span> </Button>
+
       </Form.Item>
-      <Button onClick={handleClick}>Already has account?? Login</Button>
 
     </Form>
-  );
+  );  
 };
 
 export default RegisterForm;

@@ -4,11 +4,11 @@ import { NavLink, Outlet } from "react-router-dom";
 export const BasicLayout = () => {
   const Styling = (prop: { isActive: boolean }) => {
     const { isActive } = prop;
-    return { color: isActive ? "red" : "blue" };
+    return { color: isActive ? "blue" : "black" };
   };
   return (
-    <div>
-      <div style={{ display: "flex", gap: "15px" }}>
+    <div className="app">
+      <div className="navbar">
         <NavLink style={Styling} to={"/"}>
           Home
         </NavLink>
