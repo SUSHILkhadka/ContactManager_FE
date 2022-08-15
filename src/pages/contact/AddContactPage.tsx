@@ -1,10 +1,9 @@
-import AddContactForm from "../../components/contact/AddContactForm";
+import AddContactForm from '../../components/contact/AddContactForm';
 
 export const AddContactPage = () => {
-
   return (
     <div>
-      <AddContactForm/>
+      <AddContactForm />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 export interface IAuth {
   login: boolean;
-  id: number,
+  id: number;
   username: string;
   email: string;
   password: string;
@@ -44,7 +44,7 @@ export const authSlice = createSlice({
     },
     changeName: (state, action) => {
       state.username = action.payload.name;
-      state.password=action.payload.password;
+      state.password = action.payload.password;
     },
   },
 });
