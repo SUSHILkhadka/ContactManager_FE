@@ -29,7 +29,10 @@ const AddContactForm: React.FC = () => {
   const onFinish = async (values: any) => {
     const body = JSON.stringify({
       name: values.name,
+      email: values.email,
       phoneNumber: values.phoneNumber,
+      workNumber: values.workNumber,
+      homeNumber: values.homeNumber,
       favourite: Boolean(values.favourite),
       photograph: contactInfo.photograph,
       age: values.age,
