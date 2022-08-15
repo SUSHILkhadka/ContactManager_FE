@@ -1,41 +1,46 @@
+import axios from 'axios';
 import { URL_TO_BACKEND } from '../constants/common';
 import { getAccessToken } from './localStorage';
-
+axios.defaults.baseURL = URL_TO_BACKEND;
+axios.defaults.headers.common['Authorization'] = "Bearer "+getAccessToken();
 export async function login(body: any): Promise<any> {
 
-  const accessToken=await getAccessToken();
-  const response = await fetch(URL_TO_BACKEND + '/login', {
-    method: 'POST',
-    body,
+  // const response = await fetch(URL_TO_BACKEND + '/login', {
+  //   method: 'POST',
+  //   body,
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  // });
+  // return await response.json();
+
+  
+  const response = await axios.post('/login',body,{
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`,
-    },
+    }
   });
-  return await response.json();
+  return await response.data;
+
 }
 
 export async function register(body: any): Promise<any> {
-  const response = await fetch(URL_TO_BACKEND + '/register', {
-    method: 'POST',
-    body,
+  const response = await axios.post('/register', body,{
     headers: {
       'Content-Type': 'application/json',
     },
   });
-  return await response.json();
+  return await response.data;
+
+
 }
 
 export async function editUser(body: any): Promise<any> {
-
   const accessToken=await getAccessToken();
-  const response = await fetch(URL_TO_BACKEND + '/user', {
-    method: 'PUT',
-    body,
+  const response = await axios.put('/user',body, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`,
     },
   });
-  return await response.json();
+  return await response.data;
 }

@@ -1,31 +1,8 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +12,91 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.app-name{
+  text-align: center;
+  color: brown;
+  font-size: 30px;
+  padding: 2rem;
+}
+.app-body{
+  /* display: block; */
+  background-color: rgb(137, 240, 153);
+
+}
+.navbar{
+  background-color: rgb(76, 233, 100);
+  
+  display: flex;
+  font-size: 20px;
+  color: black;
+  justify-self: center;
+
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  display: flex;
+  gap: 2rem;
+
+}
+*{
+  margin: 0rem;
+  padding: 0rem;
+}
+body{
+  background-color: blue;
+}
+.navbar :hover{
+  background-color: rgb(199, 158, 158);
+}
+.btn{
+  padding: 3rem;
+  margin: 0rem 2rem;
+}
+.hyperlink{
+  color: blue;
+  text-decoration: underline;
+}
+.img-avatar{
+  width: 15%;
+  border-radius: 80%;
+  text-align: center;
+  margin: 1rem;
+}
+.center{
+  text-align: center;
+}
+.img-avatar-table{
+  width: 3%;
+  border-radius: 80%;
+  text-align: center;
+  margin: 0rem;
+}
+
+.table-contact{
+  display: flex;
+  font-size: 20px;
+  color: black;
+  justify-self: center;
+
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  display: flex;
+  gap: 2rem;
+
+
+
+}
+
+.dropdown-menu{
+  display: flex;
+  align-items: right;
+  justify-content: right;
+}
+.brown{
+  color: brown;
+  font-size: 14px;
 }

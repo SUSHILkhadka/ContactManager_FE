@@ -37,13 +37,8 @@ const BasicContactForm = () => {
       >
         <Switch />
       </Form.Item>
-      <Form.Item
-        label="Photo"
-        name="photograph"
-        rules={[{ required: true, message: "Please input photograph!" }]}
-      >
-        <Input />
-      </Form.Item>
+
+
     </div>
   );
 };

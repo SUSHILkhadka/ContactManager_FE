@@ -16,10 +16,9 @@ export const LogoutPage = () => {
         saveRefreshToken('');
         navigate('/login', { replace: true });
     }
-
   return (
     <div>
-      <button onClick={handleLogout}>LOGOUT
+      <button onClick={handleLogout} className='btn'>LOGOUT
       </button>
     </div>
   );

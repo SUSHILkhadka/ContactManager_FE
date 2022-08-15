@@ -36,8 +36,11 @@ export const contactSlice = createSlice({
       state.favourite= false;
       state.photograph= '';
     },
+    changePhotoUrl:(state,action)=>{
+      state.photograph=action.payload
+    }
   },
 });
 
-export const { load, reset } = contactSlice.actions;
+export const { load, reset,changePhotoUrl } = contactSlice.actions;
 export const contactReducer = contactSlice.reducer;

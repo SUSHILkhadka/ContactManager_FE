@@ -33,9 +33,9 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="app-body">
       <BrowserRouter>
-        <div>CONTACT MANAGEMENT APP</div>
+        <div className="app-name">CONTACT MANAGEMENT APP</div>
         <Routes>
           <Route path="/" element={<BasicLayout />}>
             {/* <Route index element={<HomePage />} /> */}
@@ -81,7 +81,7 @@ function App() {
           <Route path="*" element={<div>Not found</div>} />
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 
