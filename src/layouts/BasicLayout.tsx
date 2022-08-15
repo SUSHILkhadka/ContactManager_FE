@@ -21,14 +21,11 @@ export const BasicLayout = () => {
         <NavLink style={Styling} to={"/contact/list"}>
           List My Contacts
         </NavLink>
+        <NavLink style={Styling} to={"/edit"}>
+          Edit
+        </NavLink>
         <NavLink style={Styling} to={"/logout"}>
           logout
-        </NavLink>
-        <NavLink style={Styling} to={"/login"}>
-          Login
-        </NavLink>
-        <NavLink style={Styling} to={"/register"}>
-          Register
         </NavLink>
       </div>
       <Outlet />

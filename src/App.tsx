@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeLoggedInWithInfo } from "./redux_toolkit/slices/authSlice";
 import { LogoutPage } from "./pages/logout/LogoutPage";
 import { EditContactPage } from "./pages/contact/EditContactPage";
+import { EditPage } from "./pages/edit/EditPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -61,6 +62,12 @@ function App() {
               element={<AdminRoute loggedIn={authInfo.login} />}
             >
               <Route index element={<LogoutPage />} />
+            </Route>
+            <Route
+              path="/edit"
+              element={<AdminRoute loggedIn={authInfo.login} />}
+            >
+              <Route index element={<EditPage />} />
             </Route>
           </Route>
 

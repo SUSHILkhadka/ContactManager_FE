@@ -26,3 +26,16 @@ export async function register(body: any): Promise<any> {
   return await response.json();
 }
 
+export async function editUser(body: any): Promise<any> {
+
+  const accessToken=await getAccessToken();
+  const response = await fetch(URL_TO_BACKEND + '/user', {
+    method: 'PUT',
+    body,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+  });
+  return await response.json();
+}
