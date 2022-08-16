@@ -2,51 +2,47 @@ import { Button, Form, Input, message } from 'antd';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {  makeLoggedOut } from '../../redux_toolkit/slices/authSlice';
+import { makeLoggedOut } from '../../redux_toolkit/slices/authSlice';
 import { editUser } from '../../services/backendCallUser';
 import { saveAccessToken, saveLoginResponse, saveRefreshToken, setLogStatus } from '../../services/localStorage';
 
 const EditForm: React.FC = () => {
-    const navigate=useNavigate();
-    const dispatch=useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const onFinish = async(values: any) => {
-    if(values.newPassword1===values.newPassword2){
-
-    const body = JSON.stringify({
+  const onFinish = async (values: any) => {
+    if (values.newPassword1 === values.newPassword2) {
+      const body = JSON.stringify({
         name: values.name,
         password: values.newPassword1,
         oldPassword: values.oldPassword,
       });
-  
+
       try {
         const response = await editUser(body);
         if (!response.data) {
           message.error(`${response.message}`);
         } else {
           message.success(`${response.message}`);
-  
-        dispatch(makeLoggedOut());
-        setLogStatus(false);
-        saveLoginResponse('');
-        saveAccessToken('');
-        saveRefreshToken('');
-        navigate('/login', { replace: true });
-        }
-      } catch {
-        message.success(`error logging in`);
-      }
-    }
-    else{
-        message.error(`new password and retype new password must match`);
 
+          dispatch(makeLoggedOut());
+          setLogStatus(false);
+          saveLoginResponse('');
+          saveAccessToken('');
+          saveRefreshToken('');
+          navigate('/login', { replace: true });
+        }
+      } catch (e) {
+        message.error(`error changing password ` + e);
+      }
+    } else {
+      message.error(`new password and retype new password must match`);
     }
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
-
 
   return (
     <Form
@@ -58,12 +54,7 @@ const EditForm: React.FC = () => {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
-
-      <Form.Item
-        label="User Name"
-        name="name"
-        rules={[{ required: true, message: 'Please input your username!' }]}
-      >
+      <Form.Item label="User Name" name="name" rules={[{ required: true, message: 'Please input your username!' }]}>
         <Input />
       </Form.Item>
 
@@ -89,8 +80,6 @@ const EditForm: React.FC = () => {
       >
         <Input.Password />
       </Form.Item>
-
-
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type="primary" htmlType="submit">

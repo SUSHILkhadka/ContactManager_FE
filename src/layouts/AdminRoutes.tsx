@@ -1,16 +1,12 @@
-import { Outlet, Navigate } from "react-router-dom";
+import { Outlet, Navigate } from 'react-router-dom';
 
 type Props = {
-  loggedIn: boolean ;
-}
+  loggedIn: boolean;
+};
 
 export default function AdminRoute(props: Props) {
-  return (
-    props.loggedIn ? <Outlet /> : <Navigate to="/login" />
-  )
+  return props.loggedIn ? <Outlet /> : <Navigate to="/login" />;
 }
-export  function AdminRoute2(props: Props) {
-    return (
-      props.loggedIn ? <Navigate to="/" />:  <Outlet />
-    )
-  }
+export function AdminRoute2(props: Props) {
+  return props.loggedIn ? <Navigate to="/" /> : <Outlet />;
+}

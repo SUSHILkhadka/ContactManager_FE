@@ -1,10 +1,9 @@
-import EditContactForm from "../../components/contact/EditContactForm";
+import EditContactForm from '../../components/contact/EditContactForm';
 
 export const EditContactPage = () => {
-
   return (
     <div>
-      <EditContactForm/>
+      <EditContactForm />
     </div>
   );
 };

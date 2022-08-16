@@ -1,32 +1,32 @@
-import { UploadOutlined } from "@ant-design/icons";
-import { Button, message, Upload } from "antd";
-import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { changePhotoUrl } from "../../redux_toolkit/slices/contactSlice";
-import { uploadToCloud } from "../../services/backendCallUpload";
+import { UploadOutlined } from '@ant-design/icons';
+import { Button, message, Upload } from 'antd';
+import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { changePhotoUrl } from '../../redux_toolkit/slices/contactSlice';
+import { uploadToCloud } from '../../services/backendCallUpload';
 
 const CustomUpload: React.FC = () => {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [uploading, setUploading] = useState(false);
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   const handleUpload = async () => {
     const formData = new FormData();
-    formData.append("name","ff");
+    formData.append('name', 'ff');
     fileList.forEach((file) => {
-      formData.append("keyForFileObject", file as RcFile);
+      formData.append('keyForFileObject', file as RcFile);
     });
     setUploading(true);
 
     try {
-      const response = await uploadToCloud(formData)
+      const response = await uploadToCloud(formData);
       setFileList([]);
-      console.log("response after upload", response);
+      console.log('response after upload', response);
       dispatch(changePhotoUrl(response.url));
-      message.success("upload successfully.");
+      message.success('upload successfully.');
     } catch (e) {
-      message.error("uploading error");
+      message.error('uploading error');
     }
     setUploading(false);
   };
@@ -58,7 +58,7 @@ const CustomUpload: React.FC = () => {
         loading={uploading}
         style={{ marginTop: 16 }}
       >
-        {uploading ? "Uploading" : "Start Upload"}
+        {uploading ? 'Uploading' : 'Start Upload'}
       </Button>
     </>
   );

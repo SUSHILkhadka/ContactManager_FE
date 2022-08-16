@@ -1,23 +1,21 @@
-import { Button, Form, message } from "antd";
+import { Button, Form, message } from 'antd';
 
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { RootState } from "../../redux_toolkit/stores/store";
-import { add } from "../../services/backendCallContact";
-import UploadImage from "../utils/UploadImage";
-import BasicContactForm from "./BasicContactForm";
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { RootState } from '../../redux_toolkit/stores/store';
+import { add } from '../../services/backendCallContact';
+import UploadImage from '../utils/UploadImage';
+import BasicContactForm from './BasicContactForm';
 
-import image from "../../assets/github.png";
+import image from '../../assets/github.png';
 
-type SizeType = Parameters<typeof Form>[0]["size"];
+type SizeType = Parameters<typeof Form>[0]['size'];
 
 const AddContactForm: React.FC = () => {
   const contactInfo = useSelector((state: RootState) => state.contact);
   const navigate = useNavigate();
-  const [componentSize, setComponentSize] = useState<SizeType | "default">(
-    "default"
-  );
+  const [componentSize, setComponentSize] = useState<SizeType | 'default'>('default');
 
   const onFormLayoutChange = ({ size }: { size: SizeType }) => {
     setComponentSize(size);
@@ -42,7 +40,7 @@ const AddContactForm: React.FC = () => {
       const contact = await add(body);
       if (contact.data) {
         message.success(`Added contact successfully. Id is ${contact.data.id}`);
-        navigate("/contact/list");
+        navigate('/contact/list');
       } else {
         message.error(contact.message);
       }
@@ -52,18 +50,14 @@ const AddContactForm: React.FC = () => {
   };
 
   const onFinishFailed = (_values: any) => {
-    console.log("fill all values");
+    console.log('fill all values');
   };
 
   return (
     <div>
       <div className="center">
         {Boolean(contactInfo.photograph) ? (
-          <img
-            className="img-avatar"
-            src={contactInfo.photograph}
-            alt="Loading"
-          />
+          <img className="img-avatar" src={contactInfo.photograph} alt="Loading" />
         ) : (
           <img className="img-avatar" src={image} alt="loadingasdf" />
         )}

@@ -1,9 +1,8 @@
-import EditForm from "../../components/edit/EditForm";
+import EditForm from '../../components/edit/EditForm';
 export const EditPage = () => {
-
   return (
     <div>
-      <EditForm/>
+      <EditForm />
     </div>
   );
 };

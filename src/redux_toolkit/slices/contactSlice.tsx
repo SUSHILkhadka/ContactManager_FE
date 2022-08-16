@@ -11,7 +11,6 @@ export interface IContact {
   photograph: string;
 }
 
-
 const defaultValue: IContact = {
   id: 0,
   name: '',
@@ -21,7 +20,6 @@ const defaultValue: IContact = {
   phoneNumber: '',
   favourite: false,
   photograph: '',
-
 };
 
 export const contactSlice = createSlice({
@@ -29,7 +27,7 @@ export const contactSlice = createSlice({
   initialState: defaultValue,
   reducers: {
     load: (state, action) => {
-        state.id = action.payload.id;
+      state.id = action.payload.id;
       state.name = action.payload.name;
       state.email = action.payload.email;
       state.workNumber = action.payload.workNumber;
@@ -39,20 +37,20 @@ export const contactSlice = createSlice({
       state.photograph = action.payload.photograph;
     },
     reset: (state: IContact) => {
-      state.id= 0;
-      state.name= '';
-      state.email= '';
-      state.workNumber= '';
-      state.homeNumber= '';
-      state.phoneNumber= '';
-      state.favourite= false;
-      state.photograph= '';
+      state.id = 0;
+      state.name = '';
+      state.email = '';
+      state.workNumber = '';
+      state.homeNumber = '';
+      state.phoneNumber = '';
+      state.favourite = false;
+      state.photograph = '';
     },
-    changePhotoUrl:(state,action)=>{
-      state.photograph=action.payload
-    }
+    changePhotoUrl: (state, action) => {
+      state.photograph = action.payload;
+    },
   },
 });
 
-export const { load, reset,changePhotoUrl } = contactSlice.actions;
+export const { load, reset, changePhotoUrl } = contactSlice.actions;
 export const contactReducer = contactSlice.reducer;
