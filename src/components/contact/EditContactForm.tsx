@@ -25,6 +25,9 @@ const EditContactForm: React.FC = () => {
   const defaultValue = {
     id: contactInfo.id,
     name: contactInfo.name,
+    email: contactInfo.email,
+    workNumber: contactInfo.workNumber,
+    homeNumber: contactInfo.homeNumber,
     phoneNumber: contactInfo.phoneNumber,
     favourite: contactInfo.favourite,
     photograph: contactInfo.photograph,
@@ -33,7 +36,10 @@ const EditContactForm: React.FC = () => {
   const onFinish = async (values: any) => {
     const body = JSON.stringify({
       name: values.name,
+      email: values.email,
       phoneNumber: values.phoneNumber,
+      workNumber: values.workNumber,
+      homeNumber: values.homeNumber,
       favourite: Boolean(values.favourite),
       photograph: contactInfo.photograph,
       age: values.age,

@@ -19,9 +19,15 @@ const BasicContactForm = () => {
       </Form.Item>
 
       <Form.Item
+        label="Email"
+        name="email"
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
         label="Phone number"
         name="phoneNumber"
-        rules={[{ required: true, message: "Please input phonenumber!" }]}
       >
         <InputNumber
           addonBefore={<UserOutlined />}
@@ -29,6 +35,21 @@ const BasicContactForm = () => {
           style={{ width: "40%" }}
         />
       </Form.Item>
+
+      <Form.Item
+        label="Work Number"
+        name="workNumber"
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        label="Home Number"
+        name="homeNumber"
+      >
+        <Input />
+      </Form.Item>
+
 
       <Form.Item
         label="Add to Favourite"

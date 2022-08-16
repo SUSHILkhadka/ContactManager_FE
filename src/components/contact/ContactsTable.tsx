@@ -86,6 +86,9 @@ const ContactsTable = (props: TT) => {
             const dataForContactInfo = {
               id: Obj.id,
               name: Obj.name,
+              email: Obj.email,
+              workNumber: Obj.workNumber,
+              homeNumber: Obj.homeNumber,
               phoneNumber: Obj.phoneNumber,
               photograph: Obj.photograph,
               favourite: Obj.favourite,
