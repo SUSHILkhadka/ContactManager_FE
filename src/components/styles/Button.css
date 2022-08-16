@@ -2,3 +2,15 @@
   background-color: rgb(123, 71, 245);
   color: black;
 }
+.btn:hover {
+  background-color: rgb(123, 71, 245);
+  color: black;
+}
+.btn-delete {
+  background-color: rgb(235, 113, 164);
+  color: aqua;
+}
+
+.btn-addcontact {
+  margin-bottom: 3rem;
+}

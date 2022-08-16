@@ -40,7 +40,7 @@ const EditContactForm: React.FC = () => {
       homeNumber: values.homeNumber,
       favourite: Boolean(values.favourite),
       photograph: contactInfo.photograph,
-      age: values.age,
+      // age: values.age,
     });
 
     try {
@@ -63,7 +63,7 @@ const EditContactForm: React.FC = () => {
       }
       navigate('/contact/list');
     } catch (e: any) {
-      message.error('error editing!! ' + e.response.data.message);
+      message.error('error deleting!! ' + e.response.data.message);
     }
   };
 
@@ -93,10 +93,12 @@ const EditContactForm: React.FC = () => {
         <BasicContactForm />
 
         <Form.Item label="Save">
-          <Button type="primary" htmlType="submit" className="btn">
+          <Button type="primary" htmlType="submit" className="btn btn-addcontact">
             Save changes to Contact
           </Button>
-          <Button onClick={handleDelete}>Delete from database</Button>
+          <Button className="btn btn-delete" onClick={handleDelete}>
+            Delete from database
+          </Button>
         </Form.Item>
       </Form>
     </div>

@@ -8,17 +8,12 @@ import { add } from '../../services/backendCallContact';
 import UploadImage from '../utils/UploadImage';
 import BasicContactForm from './BasicContactForm';
 import image from '../../assets/github.png';
-
-type SizeType = Parameters<typeof Form>[0]['size'];
+import '../styles/Button.css';
 
 const AddContactForm: React.FC = () => {
   const contactInfo = useSelector((state: RootState) => state.contact);
   const navigate = useNavigate();
-  const [componentSize, setComponentSize] = useState<SizeType | 'default'>('default');
 
-  const onFormLayoutChange = ({ size }: { size: SizeType }) => {
-    setComponentSize(size);
-  };
   const defaultValue = {
     photograph: contactInfo.photograph,
   };
@@ -71,14 +66,12 @@ const AddContactForm: React.FC = () => {
           wrapperCol={{ span: 14 }}
           layout="horizontal"
           initialValues={defaultValue}
-          onValuesChange={onFormLayoutChange}
-          size={componentSize as SizeType}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
           <BasicContactForm />
           <Form.Item label="Button">
-            <Button type="primary" htmlType="submit" className="btn">
+            <Button className="btn-addcontact btn" type="primary" htmlType="submit">
               Add new Contact to database
             </Button>
           </Form.Item>

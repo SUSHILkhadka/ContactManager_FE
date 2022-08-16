@@ -40,6 +40,7 @@
 * {
   margin: 0rem;
   padding: 0rem;
+  transition: all 0.1s;
 }
 body {
   background-color: blue;
@@ -69,37 +70,4 @@ body {
   border-radius: 80%;
   text-align: center;
   margin: 0rem;
-}
-
-.ant-table-thead > tr > th,
-.ant-table-tbody > tr > td,
-.ant-table tfoot > tr > th,
-.ant-table tfoot > tr > td {
-  position: relative;
-  padding: 8px 4px;
-  overflow-wrap: break-word;
-}
-
-.table-contact {
-  display: flex;
-  font-size: 20px;
-  color: black;
-  justify-self: center;
-
-  align-items: center;
-  justify-content: center;
-  margin: 1rem;
-  display: flex;
-  gap: 2rem;
-}
-
-.dropdown-menu {
-  display: flex;
-  align-items: right;
-  justify-content: right;
-}
-
-.dropdown-title {
-  color: rgb(199, 24, 91);
-  font-size: 18px;
 }
