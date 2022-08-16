@@ -1,0 +1,52 @@
+.navbar {
+  width: 10%;
+  display: flex;
+  align-items: left;
+  justify-items: left;
+}
+.title {
+  position: fixed;
+  color: red;
+}
+
+#components-layout-demo-side .logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+#components-layout-demo-custom-trigger .trigger {
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+  color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+.ant-menu-item-selected {
+  border-radius: 20px;
+}
+.ant-menu-item:hover {
+  /* transition: all 0s !important; */
+  border-radius: 10px !important;
+  background-color: #002146 !important;
+}
+.ant-menu-item {
+  /* transition: all 0s !important; */
+  border-radius: 10px !important;
+  /* background-color: rgb(211, 109, 109) !important; */
+}

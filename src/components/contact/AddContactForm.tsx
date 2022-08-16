@@ -1,7 +1,7 @@
 import { Button, Form, message } from 'antd';
 
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../redux_toolkit/stores/store';
 import { add } from '../../services/backendCallContact';
@@ -9,10 +9,13 @@ import UploadImage from '../utils/UploadImage';
 import BasicContactForm from './BasicContactForm';
 import image from '../../assets/github.png';
 import '../styles/Button.css';
+import { changePage } from '../../redux_toolkit/slices/pageSlice';
+import { LIST_CONTACT_PAGE } from '../../constants/common';
 
 const AddContactForm: React.FC = () => {
   const contactInfo = useSelector((state: RootState) => state.contact);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const defaultValue = {
     photograph: contactInfo.photograph,
@@ -34,7 +37,7 @@ const AddContactForm: React.FC = () => {
       const contact = await add(body);
       if (contact.data) {
         message.success(`Added contact successfully. Id is ${contact.data.id}`);
-        navigate('/contact/list');
+        dispatch(changePage(LIST_CONTACT_PAGE));
       } else {
         message.error(contact.message);
       }
@@ -70,11 +73,13 @@ const AddContactForm: React.FC = () => {
           onFinishFailed={onFinishFailed}
         >
           <BasicContactForm />
-          <Form.Item label="Button">
-            <Button className="btn-addcontact btn" type="primary" htmlType="submit">
-              Add new Contact to database
-            </Button>
-          </Form.Item>
+          <div className="center">
+            <Form.Item>
+              <Button className="btn-addcontact btn" type="primary" htmlType="submit">
+                Add new Contact to database
+              </Button>
+            </Form.Item>
+          </div>
         </Form>
       </div>
     </div>

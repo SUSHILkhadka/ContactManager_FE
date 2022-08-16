@@ -2,15 +2,6 @@ import api from './api';
 import { getRefreshToken } from './localStorage';
 
 export async function login(body: any): Promise<any> {
-  // const response = await fetch(URL_TO_BACKEND + '/login', {
-  //   method: 'POST',
-  //   body,
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  // });
-  // return await response.json();
-
   const response = await api.post('/login', body);
   return await response.data;
 }

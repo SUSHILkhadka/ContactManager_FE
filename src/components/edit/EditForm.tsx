@@ -41,48 +41,50 @@ const EditForm: React.FC = () => {
   };
 
   return (
-    <Form
-      name="basic"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      autoComplete="off"
-    >
-      <Form.Item label="User Name" name="name" rules={[{ required: true, message: 'Please input your username!' }]}>
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        label="Old Password"
-        name="oldPassword"
-        rules={[{ required: true, message: 'Please input your password!' }]}
+    <div className="form form-edit">
+      <Form
+        name="basic"
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
       >
-        <Input.Password />
-      </Form.Item>
+        <Form.Item label="User Name" name="name" rules={[{ required: true, message: 'Please input your username!' }]}>
+          <Input />
+        </Form.Item>
 
-      <Form.Item
-        label="New Password"
-        name="newPassword1"
-        rules={[{ required: true, message: 'Please input your password!' }]}
-      >
-        <Input.Password />
-      </Form.Item>
-      <Form.Item
-        label="Retype New Password"
-        name="newPassword2"
-        rules={[{ required: true, message: 'Please input your password!' }]}
-      >
-        <Input.Password />
-      </Form.Item>
+        <Form.Item
+          label="Old Password"
+          name="oldPassword"
+          rules={[{ required: true, message: 'Please input your password!' }]}
+        >
+          <Input.Password />
+        </Form.Item>
 
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          Save Changes
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item
+          label="New Password"
+          name="newPassword1"
+          rules={[{ required: true, message: 'Please input your password!' }]}
+        >
+          <Input.Password />
+        </Form.Item>
+        <Form.Item
+          label="Retype New Password"
+          name="newPassword2"
+          rules={[{ required: true, message: 'Please input your password!' }]}
+        >
+          <Input.Password />
+        </Form.Item>
+
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Button className="btn" type="primary" htmlType="submit">
+            Save Changes
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
 };
 

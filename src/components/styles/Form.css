@@ -1,3 +1,9 @@
-.form-contact {
+.form {
   margin: 2rem;
+  align-items: left;
+}
+.form-contact {
+}
+.form-edit {
+  /* float: left; */
 }

@@ -34,11 +34,11 @@ const CustomUpload: React.FC = () => {
       <ImgCrop rotate>
         <Upload {...props}>
           {uploading ? (
-            <Button className="btn-photo" type="primary" loading={uploading} style={{ marginTop: 16 }}>
+            <Button className="btn btn-photo" type="primary" loading={uploading} style={{ marginTop: 16 }}>
               'Uploading'
             </Button>
           ) : (
-            <Button type="primary" className="btn-photo">
+            <Button type="primary" className="btn btn-photo">
               Change Photo
             </Button>
           )}

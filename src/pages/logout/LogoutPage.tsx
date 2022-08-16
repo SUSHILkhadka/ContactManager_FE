@@ -9,20 +9,7 @@ import { saveAccessToken, saveLoginResponse, saveRefreshToken, setLogStatus } fr
 export const LogoutPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleLogout = async () => {
-    dispatch(makeLoggedOut());
-
-    try {
-      const res = await logout();
-      setLogStatus(false);
-      saveLoginResponse('');
-      saveAccessToken('');
-      saveRefreshToken('');
-      navigate('/login', { replace: true });
-    } catch (e) {
-      message.error('couldnot logout');
-    }
-  };
+  const handleLogout = async () => {};
   return (
     <div>
       <button onClick={handleLogout} className="btn">

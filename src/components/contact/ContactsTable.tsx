@@ -1,4 +1,4 @@
-import { Button, Input, InputRef, message, Space, Table } from 'antd';
+import { Button, Input, InputRef, message, Space, Table, Popconfirm } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +12,8 @@ import Highlighter from 'react-highlight-words';
 import { ColumnType } from 'antd/lib/table';
 import { SearchOutlined } from '@ant-design/icons';
 import '../styles/Table.css';
+import { changePage } from '../../redux_toolkit/slices/pageSlice';
+import { EDIT_CONTACT_PAGE } from '../../constants/common';
 
 type TT = {
   Obj: IContact[];
@@ -32,7 +34,6 @@ const ContactsTable = (props: TT) => {
       if (contact.data) {
         message.success(`${contact.message}. Id is ${contact.data.id}`);
       }
-      // navigate("/contact/list");
       props.reloadHandler();
     } catch (e: any) {
       message.error('error deleting!! ' + e.response.data.message);
@@ -51,7 +52,7 @@ const ContactsTable = (props: TT) => {
       favourite: Obj.favourite,
     };
     dispatch(load(dataForContactInfo));
-    navigate('/contact/edit');
+    dispatch(changePage(EDIT_CONTACT_PAGE));
   };
   const handleFavouriteChange = async (Obj: IContact) => {
     const body = {
@@ -67,7 +68,6 @@ const ContactsTable = (props: TT) => {
     try {
       const contact = await editContact(body, Obj.id);
       message.success(`${contact.message}. Id is ${contact.data.id}`);
-      // navigate('/contact/list');
       props.reloadHandler();
     } catch (e: any) {
       message.error('error editing!! ' + e.response.data.message);
@@ -162,12 +162,6 @@ const ContactsTable = (props: TT) => {
 
   const columns: ColumnsType<IContact> = [
     {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
-      render: (text) => <a>{text}</a>,
-    },
-    {
       title: 'Photograph',
       dataIndex: 'photograph',
       key: 'photograph',
@@ -212,7 +206,7 @@ const ContactsTable = (props: TT) => {
       key: 'favourite',
       render: (text: boolean, contact) => {
         return (
-          <div onClick={() => handleFavouriteChange(contact)}>
+          <div className="table-favourite" onClick={() => handleFavouriteChange(contact)}>
             {!text ? <StarOutlined /> : <StarFilled style={{ color: 'gold' }} />}
           </div>
         );
@@ -225,9 +219,15 @@ const ContactsTable = (props: TT) => {
       render: (_, record) => (
         <Space size="middle">
           <Button onClick={() => handleEdit(record)}>Edit</Button>
-          <Button className="deleteBtn" onClick={() => handleDelete(record.id)}>
-            Delete
-          </Button>
+          <Popconfirm
+            placement="top"
+            title={'Are you sure?'}
+            onConfirm={() => handleDelete(record.id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button className="deleteBtn">Delete</Button>
+          </Popconfirm>
         </Space>
       ),
     },
@@ -239,7 +239,6 @@ const ContactsTable = (props: TT) => {
         <Table
           onRow={(Obj: any, _rowIndex: any) => {
             return {
-              onMouseEnter: () => {},
               onDoubleClick: () => handleEdit(Obj),
             };
           }}

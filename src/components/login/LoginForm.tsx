@@ -1,16 +1,11 @@
 import { Button, Form, Input, message } from 'antd';
 // import Upload from "antd/lib/upload/Upload";
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { makeLoggedInWithInfo } from '../../redux_toolkit/slices/authSlice';
 import { login } from '../../services/backendCallUser';
 import { saveAccessToken, saveLoginResponse, saveRefreshToken, setLogStatus } from '../../services/localStorage';
-import { UploadOutlined } from '@ant-design/icons';
-import { URL_TO_BACKEND } from '../../constants/common';
-import { Upload, Progress } from 'antd';
-import axios, { AxiosError } from 'axios';
-import CustomUpload from '../utils/UploadImage';
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
@@ -24,8 +19,6 @@ const LoginForm: React.FC = () => {
 
     try {
       const response = await login(body);
-      console.log('login response', response);
-
       message.success(`${response.message}`);
       dispatch(makeLoggedInWithInfo(response));
 
@@ -33,8 +26,7 @@ const LoginForm: React.FC = () => {
       saveAccessToken(response.accessToken);
       saveRefreshToken(response.refreshToken);
       setLogStatus(true);
-      console.log('ffff ');
-      navigate('/about');
+      navigate('/');
     } catch (e: any) {
       message.error(e.response.data.message);
     }
@@ -49,7 +41,7 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="form form-login">
       <Form
         name="basic"
         labelCol={{ span: 8 }}

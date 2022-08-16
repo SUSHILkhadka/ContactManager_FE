@@ -1,9 +1,9 @@
 import { Form, Input, InputNumber, Switch } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { HomeOutlined, PhoneOutlined, LaptopOutlined } from '@ant-design/icons';
 import '../styles/Form.css';
 const BasicContactForm = () => {
   return (
-    <div className="form-contact">
+    <div className="form form-contact">
       <Form.Item label="Name" name="name" rules={[{ required: true, message: "Please input contact's name!" }]}>
         <Input />
       </Form.Item>
@@ -13,15 +13,15 @@ const BasicContactForm = () => {
       </Form.Item>
 
       <Form.Item label="Phone number" name="phoneNumber">
-        <InputNumber addonBefore={<UserOutlined />} controls={false} style={{ width: '40%' }} />
+        <Input addonBefore={<PhoneOutlined spin />} style={{ width: '50%' }} />
       </Form.Item>
 
       <Form.Item label="Work Number" name="workNumber">
-        <Input />
+        <Input addonBefore={<LaptopOutlined />} style={{ width: '50%' }} />
       </Form.Item>
 
       <Form.Item label="Home Number" name="homeNumber">
-        <Input />
+        <Input addonBefore={<HomeOutlined />} style={{ width: '50%' }} />
       </Form.Item>
 
       <Form.Item label="Add to Favourite" name="favourite" valuePropName="checked">

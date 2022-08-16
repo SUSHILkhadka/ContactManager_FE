@@ -1,19 +1,22 @@
-import { Button, Form, message } from 'antd';
+import { Button, Form, message, Popconfirm } from 'antd';
 
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../redux_toolkit/stores/store';
 import { deleteContact, editContact } from '../../services/backendCallContact';
 import UploadImage from '../utils/UploadImage';
 import BasicContactForm from './BasicContactForm';
 import image from '../../assets/github.png';
+import { changePage } from '../../redux_toolkit/slices/pageSlice';
+import { LIST_CONTACT_PAGE } from '../../constants/common';
 
 type SizeType = Parameters<typeof Form>[0]['size'];
 
 const EditContactForm: React.FC = () => {
   const contactInfo = useSelector((state: RootState) => state.contact);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [componentSize, setComponentSize] = useState<SizeType | 'default'>('default');
 
@@ -46,7 +49,7 @@ const EditContactForm: React.FC = () => {
     try {
       const contact = await editContact(body, contactInfo.id);
       message.success(`${contact.message}. Id is ${contact.data.id}`);
-      navigate('/contact/list');
+      dispatch(changePage(LIST_CONTACT_PAGE));
     } catch (e: any) {
       message.error('error editing!! ' + e.response.data.message);
     }
@@ -61,7 +64,7 @@ const EditContactForm: React.FC = () => {
       if (contact.data) {
         message.success(`${contact.message}. Id is ${contact.data.id}`);
       }
-      navigate('/contact/list');
+      dispatch(changePage(LIST_CONTACT_PAGE));
     } catch (e: any) {
       message.error('error deleting!! ' + e.response.data.message);
     }
@@ -96,9 +99,10 @@ const EditContactForm: React.FC = () => {
           <Button type="primary" htmlType="submit" className="btn btn-addcontact">
             Save changes to Contact
           </Button>
-          <Button className="btn btn-delete" onClick={handleDelete}>
-            Delete from database
-          </Button>
+
+          <Popconfirm placement="top" title={'Are you sure?'} onConfirm={handleDelete} okText="Yes" cancelText="No">
+            <Button className="btn btn-delete">Delete from database</Button>
+          </Popconfirm>
         </Form.Item>
       </Form>
     </div>
