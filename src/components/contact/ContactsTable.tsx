@@ -1,6 +1,5 @@
-import { Radio, Table } from 'antd';
+import { Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -24,6 +23,18 @@ const columns: ColumnsType<IContact> = [
     render: (text) => <a>{text}</a>,
   },
   {
+    title: 'Photograph',
+    dataIndex: 'photograph',
+    key: 'photograph',
+    render: (url: string) => {
+      return Boolean(url) ? (
+        <img className="img-avatar-table" src={url} alt="Loading" />
+      ) : (
+        <img className="img-avatar-table" src={image} alt="loading" />
+      );
+    },
+  },
+  {
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
@@ -40,18 +51,6 @@ const columns: ColumnsType<IContact> = [
     key: 'favourite',
     render: (text: boolean) => {
       return !text ? <StarOutlined /> : <StarFilled style={{ color: 'gold' }} />;
-    },
-  },
-  {
-    title: 'Photograph',
-    dataIndex: 'photograph',
-    key: 'photograph',
-    render: (url: string) => {
-      return Boolean(url) ? (
-        <img className="img-avatar-table" src={url} alt="Loading" />
-      ) : (
-        <img className="img-avatar-table" src={image} alt="loading" />
-      );
     },
   },
 ];

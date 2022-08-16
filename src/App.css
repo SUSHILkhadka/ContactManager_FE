@@ -65,10 +65,19 @@ body {
   text-align: center;
 }
 .img-avatar-table {
-  width: 3%;
+  width: 30%;
   border-radius: 80%;
   text-align: center;
   margin: 0rem;
+}
+
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td,
+.ant-table tfoot > tr > th,
+.ant-table tfoot > tr > td {
+  position: relative;
+  padding: 8px 4px;
+  overflow-wrap: break-word;
 }
 
 .table-contact {
@@ -89,7 +98,8 @@ body {
   align-items: right;
   justify-content: right;
 }
-.brown {
-  color: brown;
-  font-size: 14px;
+
+.dropdown-title {
+  color: rgb(199, 24, 91);
+  font-size: 18px;
 }

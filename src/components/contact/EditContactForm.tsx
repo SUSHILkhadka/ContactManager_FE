@@ -47,8 +47,8 @@ const EditContactForm: React.FC = () => {
       const contact = await editContact(body, contactInfo.id);
       message.success(`${contact.message}. Id is ${contact.data.id}`);
       navigate('/contact/list');
-    } catch (e) {
-      message.error(`${e}`);
+    } catch (e: any) {
+      message.error('error editing!! ' + e.response.data.message);
     }
   };
 
@@ -60,12 +60,10 @@ const EditContactForm: React.FC = () => {
       const contact = await deleteContact(contactInfo.id);
       if (contact.data) {
         message.success(`${contact.message}. Id is ${contact.data.id}`);
-      } else {
-        message.error(`${contact.message}`);
       }
       navigate('/contact/list');
-    } catch (e) {
-      message.error(`${e}`);
+    } catch (e: any) {
+      message.error('error editing!! ' + e.response.data.message);
     }
   };
 

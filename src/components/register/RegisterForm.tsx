@@ -15,14 +15,11 @@ const RegisterForm: React.FC = () => {
 
     try {
       const response = await register(body);
-      if (!response.data) {
-        message.error(`${response.message}`);
-      } else {
-        message.success(`${response.message}`);
-        navigate('/');
-      }
-    } catch (e) {
-      message.success(`error registerging in`);
+
+      message.success(`${response.message}`);
+      navigate('/');
+    } catch (e: any) {
+      message.error(e.response.data.message);
     }
   };
 

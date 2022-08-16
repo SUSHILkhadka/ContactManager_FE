@@ -9,7 +9,7 @@ import { saveAccessToken, saveLoginResponse, saveRefreshToken, setLogStatus } fr
 import { UploadOutlined } from '@ant-design/icons';
 import { URL_TO_BACKEND } from '../../constants/common';
 import { Upload, Progress } from 'antd';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import CustomUpload from '../utils/UploadImage';
 
 const LoginForm: React.FC = () => {
@@ -26,21 +26,17 @@ const LoginForm: React.FC = () => {
       const response = await login(body);
       console.log('login response', response);
 
-      if (!response.accessToken) {
-        message.error(`${response.message}`);
-      } else {
-        message.success(`${response.message}`);
-        dispatch(makeLoggedInWithInfo(response));
+      message.success(`${response.message}`);
+      dispatch(makeLoggedInWithInfo(response));
 
-        saveLoginResponse(JSON.stringify(response));
-        saveAccessToken(response.accessToken);
-        saveRefreshToken(response.refreshToken);
-        setLogStatus(true);
-        console.log('ffff ');
-        navigate('/about');
-      }
-    } catch (e) {
-      message.error(`error logging in` + e);
+      saveLoginResponse(JSON.stringify(response));
+      saveAccessToken(response.accessToken);
+      saveRefreshToken(response.refreshToken);
+      setLogStatus(true);
+      console.log('ffff ');
+      navigate('/about');
+    } catch (e: any) {
+      message.error(e.response.data.message);
     }
   };
 

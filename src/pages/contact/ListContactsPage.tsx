@@ -1,4 +1,4 @@
-import { Button, Dropdown, Menu, message, Space, Typography } from 'antd';
+import { Skeleton, Dropdown, Menu, message, Space, Typography } from 'antd';
 import { useEffect, useState } from 'react';
 import ContactsTable from '../../components/contact/ContactsTable';
 import { IContact } from '../../redux_toolkit/slices/contactSlice';
@@ -14,8 +14,8 @@ export const ListContactPage = () => {
         const contacts = await readMyContacts();
         setDataOrignal(contacts.data);
         setDataToDisplay(contacts.data);
-      } catch {
-        message.error('reading contacts failed');
+      } catch (e: any) {
+        message.error('reading contacts list failed!! ' + e.response.data.message);
       }
     };
     getalldata();
@@ -100,15 +100,15 @@ export const ListContactPage = () => {
     />
   );
 
-  return dataToDisplay == [] ? (
-    <div>Loading</div>
+  return !dataToDisplay.length ? (
+    <Skeleton active />
   ) : (
     <div>
       <div className="dropdown-menu">
         <Dropdown overlay={menu}>
           <Typography.Link>
-            <Space className="brown">
-              Selectable
+            <Space className="dropdown-title">
+              Sort By
               <DownOutlined />
             </Space>
           </Typography.Link>

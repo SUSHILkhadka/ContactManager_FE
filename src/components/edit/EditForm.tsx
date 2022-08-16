@@ -20,20 +20,16 @@ const EditForm: React.FC = () => {
 
       try {
         const response = await editUser(body);
-        if (!response.data) {
-          message.error(`${response.message}`);
-        } else {
-          message.success(`${response.message}`);
 
-          dispatch(makeLoggedOut());
-          setLogStatus(false);
-          saveLoginResponse('');
-          saveAccessToken('');
-          saveRefreshToken('');
-          navigate('/login', { replace: true });
-        }
-      } catch (e) {
-        message.error(`error changing password ` + e);
+        message.success(`${response.message}`);
+        dispatch(makeLoggedOut());
+        setLogStatus(false);
+        saveLoginResponse('');
+        saveAccessToken('');
+        saveRefreshToken('');
+        navigate('/login', { replace: true });
+      } catch (e: any) {
+        message.error('error editing!! ' + e.response.data.message);
       }
     } else {
       message.error(`new password and retype new password must match`);

@@ -7,7 +7,6 @@ import { RootState } from '../../redux_toolkit/stores/store';
 import { add } from '../../services/backendCallContact';
 import UploadImage from '../utils/UploadImage';
 import BasicContactForm from './BasicContactForm';
-
 import image from '../../assets/github.png';
 
 type SizeType = Parameters<typeof Form>[0]['size'];
@@ -44,8 +43,8 @@ const AddContactForm: React.FC = () => {
       } else {
         message.error(contact.message);
       }
-    } catch {
-      message.error(`error adding contact to database`);
+    } catch (e: any) {
+      message.error('error adding contact to database !! ' + e.response.data.message);
     }
   };
 
@@ -78,7 +77,6 @@ const AddContactForm: React.FC = () => {
           onFinishFailed={onFinishFailed}
         >
           <BasicContactForm />
-
           <Form.Item label="Button">
             <Button type="primary" htmlType="submit" className="btn">
               Add new Contact to database
