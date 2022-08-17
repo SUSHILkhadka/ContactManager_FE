@@ -24,6 +24,7 @@
 
 .ant-btn-primary {
   background-color: #00152d;
+  border-radius: 8px;
 }
 .ant-btn-default {
   border-radius: 10px;
