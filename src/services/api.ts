@@ -7,9 +7,12 @@ import { getAccessToken, getRefreshToken, saveAccessToken } from './localStorage
  */
 const instance = axios.create({
   baseURL: URL_TO_BACKEND,
+  // withCredentials: true,
+
   headers: {
     'Content-Type': 'application/json',
   },
+
 });
 
 /**

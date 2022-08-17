@@ -1,0 +1,16 @@
+.page-about {
+  color: red;
+  text-align: center;
+  font-size: 45px;
+  font-weight: bold;
+  margin-top: 6rem;
+  text-shadow: 10px -32px 6px rgba(73, 73, 221, 0.22);
+}
+
+.content-message {
+  color: #00152d;
+  font-size: 30px;
+}
+.AddContact {
+  margin: auto;
+}

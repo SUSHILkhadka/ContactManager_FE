@@ -1,4 +1,4 @@
-import api from './api';
+import api from "./api";
 
 /**
  *
@@ -10,6 +10,15 @@ export async function uploadToCloud(formData: FormData): Promise<any> {
   //So fetch doesn't work here
 
   //cors works here
-  const response = await api.post('/upload', formData, {});
+  const response = await api.post("/upload", formData,{
+    // data: formData,
+    // withCredentials: true,
+    // credentials: "same-origin",
+    // mode: "no-cors",
+    // crossdomain: true,
+    // headers: {
+    //   "content-type": "multipart/form-data",
+    // },
+  });
   return response.data;
 }
