@@ -1,18 +1,15 @@
 import api from './api';
-export async function uploadToCloud(formData: any): Promise<any> {
-  //mode nocors is required , which inturn don't allow authorication header in fetch
-  // const response = await fetch(URL_TO_BACKEND+"/user/all", {
-  //   // mode: "no-cors",
-  //   method: "GET",
-  //   // body: formData,
-  //   headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': `Bearer ${accessToken}`,
-  //     },
-  // });
-  // return await response.json();
+
+/**
+ *
+ * @param formData contains files appended to FormData from UploadImage component
+ * @returns response i.e url of image after successfully uploading
+ */
+export async function uploadToCloud(formData: FormData): Promise<any> {
+  //mode nocors is required , which inturn don't allow authorication header in fetch.
+  //So fetch doesn't work here
 
   //cors works here
   const response = await api.post('/upload', formData, {});
-  return await response.data;
+  return response.data;
 }

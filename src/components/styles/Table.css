@@ -1,0 +1,64 @@
+.table-contact {
+  display: flex;
+  justify-self: center;
+
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  gap: 2rem;
+
+  box-shadow: 0px 10px 51px -12px rgba(0, 0, 0, 1);
+  -webkit-box-shadow: 0px 10px 51px -12px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 0px 10px 51px -12px rgba(0, 0, 0, 1);
+}
+.table-favourite svg {
+  font-size: 30px;
+  border-radius: 20px;
+}
+.table-favourite svg:hover {
+  box-shadow: -2px 4px 49px 16px rgba(237, 187, 41, 0.96);
+  -webkit-box-shadow: -2px 4px 49px 16px rgba(237, 187, 41, 0.96);
+  -moz-box-shadow: -2px 4px 49px 16px rgba(237, 187, 41, 0.96);
+
+  transition: all 0.2s;
+}
+
+.dropdown-menu {
+  display: flex;
+  align-items: right;
+  justify-content: right;
+}
+
+.dropdown-title {
+  color: rgb(37, 10, 187);
+  font-size: 18px;
+  border-radius: 14px;
+  padding: 4px;
+  font-weight: bold;
+  box-sizing: border-box;
+
+  box-shadow: -2px 4px 13px 7px rgba(83, 106, 108, 0.54);
+  -webkit-box-shadow: -2px 4px 13px 7px rgba(83, 106, 108, 0.54);
+  -moz-box-shadow: -2px 4px 13px 7px rgba(83, 106, 108, 0.54);
+}
+tr:hover,
+thead:hover {
+  background: #275891 !important;
+  color: white;
+}
+
+.ant-table-tbody > tr.ant-table-row > td {
+  background: none !important;
+  font-size: 16px;
+}
+
+.img-avatar-table {
+  width: 40%;
+  border-radius: 80%;
+  text-align: center;
+  margin: 0rem;
+
+  box-shadow: 0px 10px 70px -29px rgba(0, 0, 0, 1);
+  -webkit-box-shadow: 0px 10px 70px -29px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 0px 10px 70px -29px rgba(0, 0, 0, 1);
+}

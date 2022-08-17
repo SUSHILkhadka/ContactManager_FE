@@ -1,19 +1,20 @@
-import { Button, Form, message } from 'antd';
+import { Button, Form, message, Popconfirm } from 'antd';
 
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux_toolkit/stores/store';
 import { deleteContact, editContact } from '../../services/backendCallContact';
-import UploadImage from '../utils/UploadImage';
+import UploadImage from '../utils/CustomUpload';
 import BasicContactForm from './BasicContactForm';
 import image from '../../assets/github.png';
+import { changePage } from '../../redux_toolkit/slices/pageSlice';
+import { LIST_CONTACT_PAGE } from '../../constants/common';
 
 type SizeType = Parameters<typeof Form>[0]['size'];
 
 const EditContactForm: React.FC = () => {
   const contactInfo = useSelector((state: RootState) => state.contact);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [componentSize, setComponentSize] = useState<SizeType | 'default'>('default');
 
@@ -40,32 +41,27 @@ const EditContactForm: React.FC = () => {
       homeNumber: values.homeNumber,
       favourite: Boolean(values.favourite),
       photograph: contactInfo.photograph,
-      age: values.age,
+      // age: values.age,
     });
 
     try {
       const contact = await editContact(body, contactInfo.id);
       message.success(`${contact.message}. Id is ${contact.data.id}`);
-      navigate('/contact/list');
-    } catch (e) {
-      message.error(`${e}`);
+      dispatch(changePage(LIST_CONTACT_PAGE));
+    } catch (e: any) {
+      message.error('error editing!! ' + e.response.data.message);
     }
   };
 
-  const onFinishFailed = (_values: any) => {
-    console.log('fill all values');
-  };
   const handleDelete = async (_values: any) => {
     try {
       const contact = await deleteContact(contactInfo.id);
       if (contact.data) {
         message.success(`${contact.message}. Id is ${contact.data.id}`);
-      } else {
-        message.error(`${contact.message}`);
       }
-      navigate('/contact/list');
-    } catch (e) {
-      message.error(`${e}`);
+      dispatch(changePage(LIST_CONTACT_PAGE));
+    } catch (e: any) {
+      message.error('error deleting!! ' + e.response.data.message);
     }
   };
 
@@ -90,15 +86,17 @@ const EditContactForm: React.FC = () => {
         onValuesChange={onFormLayoutChange}
         size={componentSize as SizeType}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
       >
         <BasicContactForm />
 
         <Form.Item label="Save">
-          <Button type="primary" htmlType="submit" className="btn">
+          <Button type="primary" htmlType="submit" className="btn btn-addcontact">
             Save changes to Contact
           </Button>
-          <Button onClick={handleDelete}>Delete from database</Button>
+
+          <Popconfirm placement="top" title={'Are you sure?'} onConfirm={handleDelete} okText="Yes" cancelText="No">
+            <Button className="btn btn-delete">Delete from database</Button>
+          </Popconfirm>
         </Form.Item>
       </Form>
     </div>

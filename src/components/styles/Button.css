@@ -1,0 +1,31 @@
+.btn-photo:hover {
+  background-color: rgb(123, 71, 245);
+  color: black;
+}
+.btn {
+  background-color: #00152d;
+
+  border-radius: 10px;
+}
+.btn:hover {
+  background-color: #0090ff;
+
+  color: white;
+}
+.btn-delete {
+  background-color: rgb(26, 3, 12);
+  color: aqua;
+}
+
+.btn-addcontact {
+  margin-bottom: 3rem;
+  margin-left: 4rem;
+}
+
+.ant-btn-primary {
+  background-color: #00152d;
+}
+.ant-btn-default {
+  border-radius: 10px;
+  border: 2px solid #00152d;
+}

@@ -1,12 +1,20 @@
 import axios from 'axios';
 import { URL_TO_BACKEND } from '../constants/common';
-import { getAccessToken, getRefreshToken, saveAccessToken } from './localStorage';
+import { getAccessToken, getRefreshToken, saveAccessToken } from './localStorageAndCookies';
+
+/**
+ * axios instane is create with given base url and headers type
+ */
 const instance = axios.create({
   baseURL: URL_TO_BACKEND,
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+/**
+ * interceptors setup for that instance before sending any request
+ */
 instance.interceptors.request.use(
   (config) => {
     if (config.headers) config.headers['Authorization'] = 'Bearer ' + getAccessToken();
@@ -16,6 +24,10 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+/**
+ * interceptors setup for axios instance after getting any response
+ */
 instance.interceptors.response.use(
   (res) => {
     return res;
@@ -23,15 +35,20 @@ instance.interceptors.response.use(
   async (err) => {
     const originalConfig = err.config;
     if (err.response) {
-      // Access Token was expired
-      if (err.response.status === 403 && !originalConfig._retry) {
+      //got error response
+      if (
+        err.response.status === 401 &&
+        !originalConfig._retry &&
+        err.response.data.message === 'invalid access token'
+      ) {
+        // Access Token was expired
+
         originalConfig._retry = true;
         try {
           const rs = await instance.post('/token', {
             refreshToken: getRefreshToken(),
           });
           const { accessToken } = rs.data;
-          console.log('new accessToken = ', accessToken);
           saveAccessToken(accessToken);
           return instance(originalConfig);
         } catch (_error) {

@@ -1,33 +1,27 @@
-import { Form, Input, InputNumber, Radio, Switch } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { Form, Input, InputNumber, Switch } from 'antd';
+import { HomeOutlined, PhoneOutlined, LaptopOutlined } from '@ant-design/icons';
+import '../styles/Form.css';
 const BasicContactForm = () => {
   return (
-    <div>
-      <Form.Item label="Form Size" name="size">
-        <Radio.Group>
-          <Radio.Button value="small">Small</Radio.Button>
-          <Radio.Button value="default">Default</Radio.Button>
-          <Radio.Button value="large">Large</Radio.Button>
-        </Radio.Group>
-      </Form.Item>
+    <div className="form form-contact">
       <Form.Item label="Name" name="name" rules={[{ required: true, message: "Please input contact's name!" }]}>
-        <Input />
+        <Input className="form-input" />
       </Form.Item>
 
       <Form.Item label="Email" name="email">
-        <Input />
+        <Input className="form-input" />
       </Form.Item>
 
       <Form.Item label="Phone number" name="phoneNumber">
-        <InputNumber addonBefore={<UserOutlined />} controls={false} style={{ width: '40%' }} />
+        <Input addonBefore={<PhoneOutlined spin />} className="form-input" />
       </Form.Item>
 
       <Form.Item label="Work Number" name="workNumber">
-        <Input />
+        <Input addonBefore={<LaptopOutlined />} className="form-input" />
       </Form.Item>
 
       <Form.Item label="Home Number" name="homeNumber">
-        <Input />
+        <Input addonBefore={<HomeOutlined />} className="form-input" />
       </Form.Item>
 
       <Form.Item label="Add to Favourite" name="favourite" valuePropName="checked">

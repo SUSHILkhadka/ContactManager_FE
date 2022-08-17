@@ -1,25 +1,20 @@
 import { Button, Form, message } from 'antd';
 
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux_toolkit/stores/store';
 import { add } from '../../services/backendCallContact';
-import UploadImage from '../utils/UploadImage';
+import UploadImage from '../utils/CustomUpload';
 import BasicContactForm from './BasicContactForm';
-
 import image from '../../assets/github.png';
-
-type SizeType = Parameters<typeof Form>[0]['size'];
+import '../styles/Button.css';
+import { changePage } from '../../redux_toolkit/slices/pageSlice';
+import { LIST_CONTACT_PAGE } from '../../constants/common';
 
 const AddContactForm: React.FC = () => {
   const contactInfo = useSelector((state: RootState) => state.contact);
-  const navigate = useNavigate();
-  const [componentSize, setComponentSize] = useState<SizeType | 'default'>('default');
+  const dispatch = useDispatch();
 
-  const onFormLayoutChange = ({ size }: { size: SizeType }) => {
-    setComponentSize(size);
-  };
   const defaultValue = {
     photograph: contactInfo.photograph,
   };
@@ -40,21 +35,17 @@ const AddContactForm: React.FC = () => {
       const contact = await add(body);
       if (contact.data) {
         message.success(`Added contact successfully. Id is ${contact.data.id}`);
-        navigate('/contact/list');
+        dispatch(changePage(LIST_CONTACT_PAGE));
       } else {
         message.error(contact.message);
       }
-    } catch {
-      message.error(`error adding contact to database`);
+    } catch (e: any) {
+      message.error('error adding contact to database !! ' + e.response.data.message);
     }
   };
 
-  const onFinishFailed = (_values: any) => {
-    console.log('fill all values');
-  };
-
   return (
-    <div>
+    <div className="">
       <div className="center">
         {Boolean(contactInfo.photograph) ? (
           <img className="img-avatar" src={contactInfo.photograph} alt="Loading" />
@@ -72,18 +63,16 @@ const AddContactForm: React.FC = () => {
           wrapperCol={{ span: 14 }}
           layout="horizontal"
           initialValues={defaultValue}
-          onValuesChange={onFormLayoutChange}
-          size={componentSize as SizeType}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
         >
           <BasicContactForm />
-
-          <Form.Item label="Button">
-            <Button type="primary" htmlType="submit" className="btn">
-              Add new Contact to database
-            </Button>
-          </Form.Item>
+          <div className="center">
+            <Form.Item>
+              <Button className="btn-addcontact btn" type="primary" htmlType="submit">
+                Add new Contact to database
+              </Button>
+            </Form.Item>
+          </div>
         </Form>
       </div>
     </div>
