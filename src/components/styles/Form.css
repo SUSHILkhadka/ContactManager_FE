@@ -1,9 +1,8 @@
 .form {
-  margin: 2rem;
-  align-items: left;
+  margin: 2rem 1rem;
+  /* align-items: left; */
 }
-.form-contact {
-}
-.form-edit {
-  /* float: left; */
+
+.form-input {
+  width: 50%;
 }

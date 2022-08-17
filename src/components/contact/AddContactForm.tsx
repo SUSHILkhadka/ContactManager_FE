@@ -1,11 +1,10 @@
 import { Button, Form, message } from 'antd';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../redux_toolkit/stores/store';
 import { add } from '../../services/backendCallContact';
-import UploadImage from '../utils/UploadImage';
+import UploadImage from '../utils/CustomUpload';
 import BasicContactForm from './BasicContactForm';
 import image from '../../assets/github.png';
 import '../styles/Button.css';
@@ -14,7 +13,6 @@ import { LIST_CONTACT_PAGE } from '../../constants/common';
 
 const AddContactForm: React.FC = () => {
   const contactInfo = useSelector((state: RootState) => state.contact);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const defaultValue = {
@@ -46,12 +44,8 @@ const AddContactForm: React.FC = () => {
     }
   };
 
-  const onFinishFailed = (_values: any) => {
-    console.log('fill all values');
-  };
-
   return (
-    <div>
+    <div className="">
       <div className="center">
         {Boolean(contactInfo.photograph) ? (
           <img className="img-avatar" src={contactInfo.photograph} alt="Loading" />
@@ -70,7 +64,6 @@ const AddContactForm: React.FC = () => {
           layout="horizontal"
           initialValues={defaultValue}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
         >
           <BasicContactForm />
           <div className="center">

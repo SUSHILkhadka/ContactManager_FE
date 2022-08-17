@@ -1,7 +1,6 @@
 import { Button, Input, InputRef, message, Space, Table, Popconfirm } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { IContact, load } from '../../redux_toolkit/slices/contactSlice';
 import { StarOutlined, StarFilled } from '@ant-design/icons';
 import image from '../../assets/github.png';
@@ -15,13 +14,12 @@ import '../styles/Table.css';
 import { changePage } from '../../redux_toolkit/slices/pageSlice';
 import { EDIT_CONTACT_PAGE } from '../../constants/common';
 
-type TT = {
+type propsTypeforContactTable = {
   Obj: IContact[];
   reloadHandler: () => void;
 };
 type DataIndex = keyof IContact;
-const ContactsTable = (props: TT) => {
-  const navigate = useNavigate();
+const ContactsTable = (props: propsTypeforContactTable) => {
   const dispatch = useDispatch();
 
   const [searchText, setSearchText] = useState('');
@@ -245,6 +243,7 @@ const ContactsTable = (props: TT) => {
           columns={columns}
           pagination={false}
           dataSource={props.Obj}
+          rowKey="id"
         />
       </div>
     </div>

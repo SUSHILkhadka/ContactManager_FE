@@ -4,7 +4,7 @@ export interface PageNumber {
 }
 
 const defaultValue: PageNumber = {
-  page: 1,
+  page: 2,
 };
 
 export const pageSlice = createSlice({

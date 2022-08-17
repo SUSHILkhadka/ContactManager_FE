@@ -2,10 +2,9 @@ import { Button, Form, message, Popconfirm } from 'antd';
 
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../redux_toolkit/stores/store';
 import { deleteContact, editContact } from '../../services/backendCallContact';
-import UploadImage from '../utils/UploadImage';
+import UploadImage from '../utils/CustomUpload';
 import BasicContactForm from './BasicContactForm';
 import image from '../../assets/github.png';
 import { changePage } from '../../redux_toolkit/slices/pageSlice';
@@ -15,7 +14,6 @@ type SizeType = Parameters<typeof Form>[0]['size'];
 
 const EditContactForm: React.FC = () => {
   const contactInfo = useSelector((state: RootState) => state.contact);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [componentSize, setComponentSize] = useState<SizeType | 'default'>('default');
@@ -55,9 +53,6 @@ const EditContactForm: React.FC = () => {
     }
   };
 
-  const onFinishFailed = (_values: any) => {
-    console.log('fill all values');
-  };
   const handleDelete = async (_values: any) => {
     try {
       const contact = await deleteContact(contactInfo.id);
@@ -91,7 +86,6 @@ const EditContactForm: React.FC = () => {
         onValuesChange={onFormLayoutChange}
         size={componentSize as SizeType}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
       >
         <BasicContactForm />
 

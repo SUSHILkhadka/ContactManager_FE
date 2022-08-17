@@ -5,7 +5,12 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { makeLoggedInWithInfo } from '../../redux_toolkit/slices/authSlice';
 import { login } from '../../services/backendCallUser';
-import { saveAccessToken, saveLoginResponse, saveRefreshToken, setLogStatus } from '../../services/localStorage';
+import {
+  saveAccessToken,
+  saveLoginResponse,
+  saveRefreshToken,
+  setLogStatus,
+} from '../../services/localStorageAndCookies';
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
@@ -24,16 +29,12 @@ const LoginForm: React.FC = () => {
 
       saveLoginResponse(JSON.stringify(response));
       saveAccessToken(response.accessToken);
-      saveRefreshToken(response.refreshToken);
+      saveRefreshToken(response.refreshToken, response.expiresAtRefreshToken);
       setLogStatus(true);
       navigate('/');
     } catch (e: any) {
       message.error(e.response.data.message);
     }
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
   };
 
   const handleClick = () => {
@@ -48,11 +49,10 @@ const LoginForm: React.FC = () => {
         wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Please input your email!' }]}>
-          <Input />
+          <Input className="form-input" />
         </Form.Item>
 
         <Form.Item
@@ -60,7 +60,7 @@ const LoginForm: React.FC = () => {
           name="password"
           rules={[{ required: true, message: 'Please input your password!' }]}
         >
-          <Input.Password />
+          <Input.Password className="form-input" />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

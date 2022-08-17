@@ -14,6 +14,7 @@ const CustomUpload: React.FC = () => {
     beforeUpload: async (file) => {
       const formData = new FormData();
       formData.append('keyForFileObject', file);
+      console.log('file', file);
       setUploading(true);
       try {
         const response = await uploadToCloud(formData);
@@ -28,7 +29,6 @@ const CustomUpload: React.FC = () => {
     maxCount: 1,
     showUploadList: false,
   };
-
   return (
     <>
       <ImgCrop rotate>

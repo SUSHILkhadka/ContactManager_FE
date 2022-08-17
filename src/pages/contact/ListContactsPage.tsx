@@ -17,7 +17,6 @@ export const ListContactPage = () => {
   };
 
   useEffect(() => {
-    console.log('sort id = ', sortMethodId);
     const getalldata = async () => {
       try {
         const contacts = await readMyContacts();
@@ -58,7 +57,6 @@ export const ListContactPage = () => {
 
   const ascendingAll = () => {
     const temp = Object.create(dataOriginal);
-    console.log('orignla data AsAll = ', dataOriginal);
     setDataToDisplay(temp);
     setSortMethodId(0);
   };
@@ -72,7 +70,6 @@ export const ListContactPage = () => {
       if (keyA > keyB) return -1;
       return 0;
     });
-    console.log('orignla data  DeAll= ', dataOriginal);
     setDataToDisplay(temp);
     setSortMethodId(1);
   };
@@ -83,7 +80,6 @@ export const ListContactPage = () => {
       if (element.favourite) listOfFavourite.push(element);
     });
     if (listOfFavourite.length > 0) {
-      console.log('after sorting only favourites', listOfFavourite);
       setDataToDisplay(listOfFavourite);
     } else {
       setDataToDisplay([]);

@@ -2,21 +2,27 @@ import './Layout.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { EditContactPage } from '../pages/contact/EditContactPage';
 import { ListContactPage } from '../pages/contact/ListContactsPage';
-import { HomePage } from '../pages/home/HomePage';
 import { changePage } from '../redux_toolkit/slices/pageSlice';
 import { RootState } from '../redux_toolkit/stores/store';
 import { PieChartOutlined, UserAddOutlined, ContactsFilled, SettingOutlined, LogoutOutlined } from '@ant-design/icons';
-import { MenuProps, message, Modal } from 'antd';
-import { Layout, Menu } from 'antd';
-import React, { useState } from 'react';
+import { Layout, Menu, MenuProps, message, Modal } from 'antd';
+import React, { useEffect, useState } from 'react';
 import { EditPage } from '../pages/edit/EditPage';
 import { AddContactPage } from '../pages/contact/AddContactPage';
 import { makeLoggedOut } from '../redux_toolkit/slices/authSlice';
 import { logout } from '../services/backendCallUser';
-import { saveAccessToken, saveLoginResponse, saveRefreshToken, setLogStatus } from '../services/localStorage';
+import {
+  getExpiresAtRefreshToken,
+  saveAccessToken,
+  saveLoginResponse,
+  saveRefreshToken,
+  setLogStatus,
+} from '../services/localStorageAndCookies';
 import { useNavigate } from 'react-router-dom';
+import { reset } from '../redux_toolkit/slices/contactSlice';
+import { AboutPage } from '../pages/about/About';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -38,7 +44,6 @@ function getItem(
 
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-
   const pageInfo = useSelector((state: RootState) => state.page);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -48,38 +53,33 @@ const App: React.FC = () => {
       case 1:
         return (
           <div>
-            <HomePage />
+            <AboutPage />
           </div>
         );
-        break;
       case 2:
         return (
           <div>
             <ListContactPage />
           </div>
         );
-        break;
       case 3:
         return (
           <div>
             <AddContactPage />
           </div>
         );
-        break;
       case 4:
         return (
           <div>
             <EditPage />
           </div>
         );
-        break;
       case 5:
         return (
           <div>
             <EditContactPage />
           </div>
         );
-        break;
       default:
         return <div>Not found</div>;
     }
@@ -87,9 +87,9 @@ const App: React.FC = () => {
 
   const items: MenuItem[] = [
     getItem('Create New Contact', '3', () => dispatch(changePage(3)), <UserAddOutlined />),
-    getItem('Home', '1', () => dispatch(changePage(1)), <PieChartOutlined />),
     getItem('Contacts', '2', () => dispatch(changePage(2)), <ContactsFilled />),
     getItem('Settings', '4', () => dispatch(changePage(4)), <SettingOutlined spin />),
+    getItem('About', '1', () => dispatch(changePage(1)), <PieChartOutlined />),
     getItem('Logout', '6', () => showModal(), <LogoutOutlined spin />),
   ];
 
@@ -99,21 +99,29 @@ const App: React.FC = () => {
     setIsModalVisible(true);
   };
 
-  const handleOk = async () => {
+  const handleOk = async (msg?: string) => {
     setIsModalVisible(false);
     dispatch(makeLoggedOut());
+    dispatch(reset());
     try {
       const res = await logout();
       setLogStatus(false);
       saveLoginResponse('');
       saveAccessToken('');
       saveRefreshToken('');
-      message.success('logged out successfully');
+      message.success(msg + 'logged out successfully');
       navigate('/login', { replace: true });
     } catch (e) {
       message.error('couldnot logout');
     }
   };
+
+  //if expiresAtToken
+  useEffect(() => {
+    if (getExpiresAtRefreshToken() < Date.now()) {
+      handleOk('session expired ');
+    }
+  }, [pageInfo.page]);
 
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -129,7 +137,7 @@ const App: React.FC = () => {
         <Content style={{ margin: '0.5rem 1rem' }}>{body()}</Content>
         <Footer style={{ textAlign: 'center' }}>Contact Management ©2022</Footer>
       </Layout>
-      <Modal title="Logout" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+      <Modal title="Logout" visible={isModalVisible} onOk={() => handleOk('')} onCancel={handleCancel}>
         <p>Are you sure you want to logout?</p>
       </Modal>
     </Layout>
