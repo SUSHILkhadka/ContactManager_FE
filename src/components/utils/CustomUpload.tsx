@@ -15,7 +15,6 @@ const CustomUpload: React.FC = () => {
       setloading(true);
       const formData = new FormData();
       formData.append('keyForFileObject', file);
-      console.log('file', file);
       try {
         const response = await uploadToCloud(formData);
         dispatch(changePhotoUrl(response.url));

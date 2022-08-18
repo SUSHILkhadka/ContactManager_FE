@@ -26,19 +26,18 @@ const LoginForm: React.FC = () => {
     setloading(true);
     try {
       const response = await login(body);
-      message.success(`${response.message}`);
       dispatch(makeLoggedInWithInfo(response));
 
       saveLoginResponse(JSON.stringify(response));
       saveAccessToken(response.accessToken);
       saveRefreshToken(response.refreshToken, response.expiresAtRefreshToken);
       setLogStatus(true);
-      navigate('/');
+      navigate('/home');
+      message.success(`${response.message}`);
     } catch (e: any) {
       message.error(e.response.data.message);
     }
     setloading(false);
-
   };
 
   const handleClick = () => {

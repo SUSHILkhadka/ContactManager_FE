@@ -1,9 +1,9 @@
-import { Skeleton, Dropdown, Menu, message, Space, Typography } from 'antd';
-import { useEffect, useState } from 'react';
-import ContactsTable from '../../components/contact/ContactsTable';
-import { IContact } from '../../redux_toolkit/slices/contactSlice';
-import { readMyContacts } from '../../services/backendCallContact';
-import { DownOutlined } from '@ant-design/icons';
+import { Skeleton, Dropdown, Menu, message, Space, Typography } from "antd";
+import { useEffect, useState } from "react";
+import ContactsTable from "../../components/contact/ContactsTable";
+import { IContact } from "../../redux_toolkit/slices/contactSlice";
+import { readMyContacts } from "../../services/backendCallContact";
+import { DownOutlined } from "@ant-design/icons";
 
 export const ListContactPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -17,7 +17,7 @@ export const ListContactPage = () => {
   };
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     const getalldata = async () => {
       try {
         const contacts = await readMyContacts();
@@ -32,12 +32,14 @@ export const ListContactPage = () => {
         setDataOrignal(sorted);
         setDataToDisplay(sorted);
       } catch (e: any) {
-        message.error('reading contacts list failed!! ' + e.response.data.message);
+        message.error(
+          "reading contacts list failed!! " + e.response.data.message
+        );
         setDataToDisplay([]);
       }
+    setLoading(false);
     };
     getalldata();
-    setLoading(false);
   }, [reload]);
 
   useEffect(() => {
@@ -109,22 +111,22 @@ export const ListContactPage = () => {
       defaultSelectedKeys={[`${sortMethodId}`]}
       items={[
         {
-          key: '0',
+          key: "0",
           label: <div>ascendingAll</div>,
           onClick: ascendingAll,
         },
         {
-          key: '1',
+          key: "1",
           label: <div>descendingAll</div>,
           onClick: descendingAll,
         },
         {
-          key: '2',
+          key: "2",
           label: <div>ascendingFavouritesOnly</div>,
           onClick: ascendingFavouritesOnly,
         },
         {
-          key: '3',
+          key: "3",
           label: <div>ascendingFavouritesFirstThenRest</div>,
           onClick: ascendingFavouritesFirstThenRest,
         },
@@ -132,9 +134,7 @@ export const ListContactPage = () => {
     />
   );
 
-  return loading ? (
-    <Skeleton active />
-  ) : (
+  return  (
     <div>
       <div className="dropdown-menu">
         <Dropdown overlay={menu}>
@@ -146,9 +146,13 @@ export const ListContactPage = () => {
           </Typography.Link>
         </Dropdown>
       </div>
-      <div className="table-contact">
-        <ContactsTable Obj={dataToDisplay} reloadHandler={handleReload} />
-      </div>
+      {loading ? (
+        <Skeleton active />
+      ) : (
+        <div className="table-contact">
+          <ContactsTable Obj={dataToDisplay} reloadHandler={handleReload} />
+        </div>
+      )}
     </div>
   );
 };

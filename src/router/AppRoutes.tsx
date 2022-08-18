@@ -10,7 +10,7 @@ function AppRoutes() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AdminRoute loggedIn={getLogStatus()} />}>
-          <Route path="/" element={<BasicLayout />}></Route>
+          <Route path="/home" element={<BasicLayout />}></Route>
         </Route>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
