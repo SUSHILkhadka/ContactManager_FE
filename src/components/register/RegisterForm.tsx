@@ -1,12 +1,14 @@
 import { Button, Form, Input, message } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../../services/backendCallUser';
 import '../../App.css';
 const RegisterForm: React.FC = () => {
+  const [loading, setloading] = useState(false);
   const navigate = useNavigate();
 
   const onFinish = async (values: any) => {
+    setloading(true);
     const body = JSON.stringify({
       name: values.name,
       email: values.email,
@@ -15,12 +17,12 @@ const RegisterForm: React.FC = () => {
 
     try {
       const response = await register(body);
-
       message.success(`${response.message}`);
       navigate('/');
     } catch (e: any) {
       message.error(e.response.data.message);
     }
+    setloading(false);
   };
 
   const handleClick = () => {
@@ -54,7 +56,7 @@ const RegisterForm: React.FC = () => {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit" className="btn">
+          <Button type="primary" htmlType="submit" className="btn" loading={loading}>
             Register
           </Button>
           <Button onClick={handleClick}>Already has account?? Login </Button>

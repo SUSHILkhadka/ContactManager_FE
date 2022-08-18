@@ -1,6 +1,6 @@
 import { Button, Form, Input, message } from 'antd';
 // import Upload from "antd/lib/upload/Upload";
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { makeLoggedInWithInfo } from '../../redux_toolkit/slices/authSlice';
@@ -14,6 +14,8 @@ import {
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
+  const [loading, setloading] = useState(false);
+
   const dispatch = useDispatch();
 
   const onFinish = async (values: any) => {
@@ -21,7 +23,7 @@ const LoginForm: React.FC = () => {
       email: values.email,
       password: values.password,
     });
-
+    setloading(true);
     try {
       const response = await login(body);
       message.success(`${response.message}`);
@@ -35,6 +37,8 @@ const LoginForm: React.FC = () => {
     } catch (e: any) {
       message.error(e.response.data.message);
     }
+    setloading(false);
+
   };
 
   const handleClick = () => {
@@ -64,7 +68,7 @@ const LoginForm: React.FC = () => {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit" className="btn">
+          <Button type="primary" htmlType="submit" className="btn" loading={loading}>
             LogIn
           </Button>
           <Button onClick={handleClick}>New user?? Register</Button>

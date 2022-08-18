@@ -1,6 +1,6 @@
 import { Button, Form, message } from 'antd';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux_toolkit/stores/store';
 import { add } from '../../services/backendCallContact';
@@ -12,6 +12,7 @@ import { changePage } from '../../redux_toolkit/slices/pageSlice';
 import { LIST_CONTACT_PAGE } from '../../constants/common';
 
 const AddContactForm: React.FC = () => {
+  const [loading, setloading] = useState(false);
   const contactInfo = useSelector((state: RootState) => state.contact);
   const dispatch = useDispatch();
 
@@ -20,6 +21,7 @@ const AddContactForm: React.FC = () => {
   };
 
   const onFinish = async (values: any) => {
+    setloading(true);
     const body = JSON.stringify({
       name: values.name,
       email: values.email,
@@ -42,6 +44,7 @@ const AddContactForm: React.FC = () => {
     } catch (e: any) {
       message.error('error adding contact to database !! ' + e.response.data.message);
     }
+    setloading(false);
   };
 
   return (
@@ -68,7 +71,7 @@ const AddContactForm: React.FC = () => {
           <BasicContactForm />
           <div className="center">
             <Form.Item>
-              <Button className="btn-addcontact btn" type="primary" htmlType="submit">
+              <Button className="btn-addcontact btn" type="primary" htmlType="submit" loading={loading}>
                 Add new Contact to database
               </Button>
             </Form.Item>

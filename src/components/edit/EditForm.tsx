@@ -1,5 +1,5 @@
 import { Button, Form, Input, message } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { makeLoggedOut } from '../../redux_toolkit/slices/authSlice';
@@ -13,6 +13,7 @@ import {
 } from '../../services/localStorageAndCookies';
 import '../styles/Form.css';
 const EditForm: React.FC = () => {
+  const [loading, setloading] = useState(false);
   const authInfo = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const EditForm: React.FC = () => {
   };
 
   const onFinish = async (values: any) => {
+    setloading(true);
     if (values.newPassword1 === values.newPassword2) {
       const body = JSON.stringify({
         name: values.name,
@@ -46,6 +48,7 @@ const EditForm: React.FC = () => {
     } else {
       message.error(`new password and retype new password must match`);
     }
+    setloading(false);
   };
 
   return (
@@ -89,7 +92,7 @@ const EditForm: React.FC = () => {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button className="btn" type="primary" htmlType="submit">
+          <Button className="btn" type="primary" htmlType="submit" loading={loading}>
             Confirm Changes
           </Button>
         </Form.Item>

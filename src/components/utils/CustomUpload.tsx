@@ -7,15 +7,15 @@ import { uploadToCloud } from '../../services/backendCallUpload';
 import ImgCrop from 'antd-img-crop';
 import '../styles/Button.css';
 const CustomUpload: React.FC = () => {
-  const [uploading, setUploading] = useState(false);
+  const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
 
   const props: UploadProps = {
     beforeUpload: async (file) => {
+      setloading(true);
       const formData = new FormData();
       formData.append('keyForFileObject', file);
       console.log('file', file);
-      setUploading(true);
       try {
         const response = await uploadToCloud(formData);
         dispatch(changePhotoUrl(response.url));
@@ -23,7 +23,7 @@ const CustomUpload: React.FC = () => {
       } catch (e) {
         message.error('uploading error');
       }
-      setUploading(false);
+      setloading(false);
       return false;
     },
     maxCount: 1,
@@ -33,8 +33,8 @@ const CustomUpload: React.FC = () => {
     <>
       <ImgCrop rotate>
         <Upload {...props}>
-          {uploading ? (
-            <Button className="btn btn-photo" type="primary" loading={uploading} style={{ marginTop: 16 }}>
+          {loading ? (
+            <Button className="btn btn-photo" type="primary" loading={loading} style={{ marginTop: 16 }}>
               'Uploading'
             </Button>
           ) : (

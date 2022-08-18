@@ -13,6 +13,7 @@ import { LIST_CONTACT_PAGE } from '../../constants/common';
 type SizeType = Parameters<typeof Form>[0]['size'];
 
 const EditContactForm: React.FC = () => {
+  const [loading, setloading] = useState(false);
   const contactInfo = useSelector((state: RootState) => state.contact);
   const dispatch = useDispatch();
 
@@ -33,6 +34,7 @@ const EditContactForm: React.FC = () => {
   };
 
   const onFinish = async (values: any) => {
+    setloading(true);
     const body = JSON.stringify({
       name: values.name,
       email: values.email,
@@ -51,6 +53,7 @@ const EditContactForm: React.FC = () => {
     } catch (e: any) {
       message.error('error editing!! ' + e.response.data.message);
     }
+    setloading(false);
   };
 
   const handleDelete = async (_values: any) => {
@@ -90,7 +93,7 @@ const EditContactForm: React.FC = () => {
         <BasicContactForm />
 
         <Form.Item label="Save">
-          <Button type="primary" htmlType="submit" className="btn btn-addcontact">
+          <Button type="primary" htmlType="submit" className="btn btn-addcontact" loading={loading}>
             Save changes to Contact
           </Button>
 
