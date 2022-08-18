@@ -31,8 +31,8 @@ const LoginForm: React.FC = () => {
       saveLoginResponse(JSON.stringify(response));
       saveAccessToken(response.accessToken);
       saveRefreshToken(response.refreshToken, response.expiresAtRefreshToken);
-      setLogStatus(true);
-      navigate('/home');
+      await setLogStatus(true);
+      navigate('/');
       message.success(`${response.message}`);
     } catch (e: any) {
       message.error(e.response.data.message);
