@@ -17,6 +17,7 @@ export const ListContactPage = () => {
   };
 
   useEffect(() => {
+    setLoading(true)
     const getalldata = async () => {
       try {
         const contacts = await readMyContacts();
