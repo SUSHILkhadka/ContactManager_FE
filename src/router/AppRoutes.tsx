@@ -3,7 +3,6 @@ import BasicLayout from '../layouts/BasicLayout';
 import AdminRoute from './AdminRoutes';
 import { RegisterPage } from '../pages/register/RegisterPage';
 import { LoginPage } from '../pages/login/LoginPage';
-import { getLogStatus } from '../services/localStorageAndCookies';
 
 function AppRoutes() {
   return (

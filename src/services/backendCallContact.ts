@@ -14,7 +14,7 @@ export async function add(body: any): Promise<any> {
  *
  * @returns all of user's contacts from contacts table
  */
-export async function readMyContacts(): Promise<any> {
+export async function readAllContacts(): Promise<any> {
   const response = await api.get('/contacts');
   return response.data;
 }

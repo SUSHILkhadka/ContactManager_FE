@@ -5,7 +5,6 @@ import { getLoginResponse, getLogStatus } from './services/localStorageAndCookie
 import { useDispatch } from 'react-redux';
 import { makeLoggedInWithInfo } from './redux_toolkit/slices/authSlice';
 import AppRoutes from './router/AppRoutes';
-
 import { ReactComponent as ReactLogo } from './assets/contact_icon.svg';
 import Icon from '@ant-design/icons';
 function App() {

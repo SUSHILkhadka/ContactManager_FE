@@ -7,15 +7,6 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
-    "@types/antd": "^1.0.0",
-    "@types/axios": "^0.14.0",
-    "@types/dotenv": "^8.2.0",
-    "@types/jest": "^27.5.2",
-    "@types/js-cookie": "^3.0.2",
-    "@types/node": "^16.11.48",
-    "@types/react": "^18.0.17",
-    "@types/react-dom": "^18.0.6",
-    "@types/react-highlight-words": "^0.16.4",
     "antd": "^4.22.4",
     "antd-img-crop": "^4.2.4",
     "axios": "^0.27.2",
@@ -36,7 +27,8 @@
     "build": "CI=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prettify": "prettier --single-quote --print-width 120 --write ."
+    "prettify": "prettier --single-quote --print-width 120 --write .",
+    "lint": "eslint --fix . --ext .ts,.tsx"
   },
   "eslintConfig": {
     "extends": [
@@ -57,6 +49,15 @@
     ]
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.26"
+    "@types/styled-components": "^5.1.26",
+    "@types/antd": "^1.0.0",
+    "@types/axios": "^0.14.0",
+    "@types/dotenv": "^8.2.0",
+    "@types/jest": "^27.5.2",
+    "@types/js-cookie": "^3.0.2",
+    "@types/node": "^16.11.48",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@types/react-highlight-words": "^0.16.4"
   }
 }

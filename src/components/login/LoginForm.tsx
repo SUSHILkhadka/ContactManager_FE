@@ -34,7 +34,7 @@ const LoginForm: React.FC = () => {
       await setLogStatus(true);
       navigate('/');
       message.success(`${response.message}`);
-    } catch (e: any) {
+    } catch (e: any) {  
       message.error(e.response.data.message);
     }
     setloading(false);

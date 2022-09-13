@@ -1,5 +1,4 @@
 import { Button, Form, message } from 'antd';
-
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux_toolkit/stores/store';
@@ -15,7 +14,6 @@ const AddContactForm: React.FC = () => {
   const [loading, setloading] = useState(false);
   const contactInfo = useSelector((state: RootState) => state.contact);
   const dispatch = useDispatch();
-
   const defaultValue = {
     photograph: contactInfo.photograph,
   };
