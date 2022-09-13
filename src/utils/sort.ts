@@ -1,4 +1,4 @@
-import { IContact } from "../redux_toolkit/slices/contactSlice";
+import { IContact } from "../interface/IContact";
 
 export const sortByAscendingAll = (dataOriginal: IContact[]) => {
   const temp = Object.create(dataOriginal);

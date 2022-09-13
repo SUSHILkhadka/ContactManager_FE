@@ -1,14 +1,27 @@
-import { Form, Input, InputNumber, Switch } from 'antd';
-import { HomeOutlined, PhoneOutlined, LaptopOutlined } from '@ant-design/icons';
-import '../styles/Form.css';
+import { HomeOutlined, LaptopOutlined, PhoneOutlined } from "@ant-design/icons";
+import { Form, Input, Switch } from "antd";
+import "../styles/Form.css";
 const BasicContactForm = () => {
   return (
     <div className="form form-contact">
-      <Form.Item label="Name" name="name" rules={[{ required: true, message: "Please input contact's name!" }]}>
+      <Form.Item
+        label="Name"
+        name="name"
+        rules={[{ required: true, message: "Please input contact's name!" }]}
+      >
         <Input className="form-input" />
       </Form.Item>
 
-      <Form.Item label="Email" name="email">
+      <Form.Item
+        rules={[
+          {
+            type: "email",
+            message: "Please input valid email!",
+          },
+        ]}
+        label="Email"
+        name="email"
+      >
         <Input className="form-input" />
       </Form.Item>
 
@@ -24,7 +37,11 @@ const BasicContactForm = () => {
         <Input addonBefore={<HomeOutlined />} className="form-input" />
       </Form.Item>
 
-      <Form.Item label="Add to Favourite" name="favourite" valuePropName="checked">
+      <Form.Item
+        label="Add to Favourite"
+        name="favourite"
+        valuePropName="checked"
+      >
         <Switch />
       </Form.Item>
     </div>

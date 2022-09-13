@@ -1,10 +1,10 @@
 import { Skeleton, message } from "antd";
 import { useEffect, useState } from "react";
 import ContactsTable from "../../components/contact/ContactsTable";
-import { IContact } from "../../redux_toolkit/slices/contactSlice";
 import { readAllContacts } from "../../services/backendCallContact";
 import { sortByAscendingAll } from "../../utils/sort";
 import CustomSort from "../../components/utils/CustomSort";
+import { IContact } from "../../interface/IContact";
 
 export const ListContactPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
