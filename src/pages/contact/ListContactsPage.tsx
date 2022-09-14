@@ -45,9 +45,7 @@ export const ListContactPage = () => {
       {loading ? (
         <Skeleton active />
       ) : (
-        <div className="table-contact">
           <ContactsTable Obj={dataToDisplay} reloadHandler={handleReload} />
-        </div>
       )}
     </div>
   );

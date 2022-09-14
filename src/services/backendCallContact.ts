@@ -1,4 +1,4 @@
-import api from './api';
+import api from "./api";
 
 /**
  *
@@ -6,7 +6,7 @@ import api from './api';
  * @returns response from server
  */
 export async function add(body: any): Promise<any> {
-  const response = await api.post('/contacts', body);
+  const response = await api.post("/contacts", body);
   return response.data;
 }
 
@@ -15,7 +15,7 @@ export async function add(body: any): Promise<any> {
  * @returns all of user's contacts from contacts table
  */
 export async function readAllContacts(): Promise<any> {
-  const response = await api.get('/contacts');
+  const response = await api.get("/contacts");
   return response.data;
 }
 

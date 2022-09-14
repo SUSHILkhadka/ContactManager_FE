@@ -1,14 +1,15 @@
-import { Button, Form, message } from 'antd';
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux_toolkit/stores/store';
-import { add } from '../../services/backendCallContact';
-import UploadImage from '../utils/CustomUpload';
-import BasicContactForm from './BasicContactForm';
-import image from '../../assets/github.png';
-import '../styles/Button.css';
-import { changePage } from '../../redux_toolkit/slices/pageSlice';
-import { LIST_CONTACT_PAGE } from '../../constants/common';
+import { Button, Form, message } from "antd";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { LIST_CONTACT_PAGE } from "../../constants/common";
+import { changePage } from "../../redux_toolkit/slices/pageSlice";
+import { RootState } from "../../redux_toolkit/stores/store";
+import { add } from "../../services/backendCallContact";
+import contactSchema from "../../validations/contactSchema";
+import Validator from "../../validations/Validator";
+import "../styles/Button.css";
+import UploadImage from "../utils/CustomUpload";
+import BasicContactForm from "./BasicContactForm";
 
 const AddContactForm: React.FC = () => {
   const [loading, setloading] = useState(false);
@@ -20,7 +21,7 @@ const AddContactForm: React.FC = () => {
 
   const onFinish = async (values: any) => {
     setloading(true);
-    const body = JSON.stringify({
+    const body = {
       name: values.name,
       email: values.email,
       phoneNumber: values.phoneNumber,
@@ -28,10 +29,10 @@ const AddContactForm: React.FC = () => {
       homeNumber: values.homeNumber,
       favourite: Boolean(values.favourite),
       photograph: contactInfo.photograph,
-      age: values.age,
-    });
+    };
 
     try {
+      Validator(body, contactSchema);
       const contact = await add(body);
       if (contact.data) {
         message.success(`Added contact successfully. Id is ${contact.data.id}`);
@@ -40,20 +41,14 @@ const AddContactForm: React.FC = () => {
         message.error(contact.message);
       }
     } catch (e: any) {
-      message.error('error adding contact to database !! ' + e.response.data.message);
+      if (e.response) message.error(e.response.data.message);
+      else message.error(e);
     }
     setloading(false);
   };
 
   return (
     <div className="">
-      <div className="center">
-        {Boolean(contactInfo.photograph) ? (
-          <img className="img-avatar" src={contactInfo.photograph} alt="Loading" />
-        ) : (
-          <img className="img-avatar" src={image} alt="loadingasdf" />
-        )}
-      </div>
       <div className="center">
         <UploadImage />
       </div>
@@ -69,7 +64,12 @@ const AddContactForm: React.FC = () => {
           <BasicContactForm />
           <div className="center">
             <Form.Item>
-              <Button className="btn-addcontact btn" type="primary" htmlType="submit" loading={loading}>
+              <Button
+                className="btn-addcontact btn"
+                type="primary"
+                htmlType="submit"
+                loading={loading}
+              >
                 Add new Contact to database
               </Button>
             </Form.Item>

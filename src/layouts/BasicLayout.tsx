@@ -54,35 +54,15 @@ const App: React.FC = () => {
   const body = () => {
     switch (pageInfo.page) {
       case 1:
-        return (
-          <div>
-            <AboutPage />
-          </div>
-        );
+        return <AboutPage />;
       case 2:
-        return (
-          <div>
-            <ListContactPage />
-          </div>
-        );
+        return <ListContactPage />;
       case 3:
-        return (
-          <div>
-            <AddContactPage />
-          </div>
-        );
+        return <AddContactPage />;
       case 4:
-        return (
-          <div>
-            <EditPage />
-          </div>
-        );
+        return <EditPage />;
       case 5:
-        return (
-          <div>
-            <EditContactPage />
-          </div>
-        );
+        return <EditContactPage />;
       default:
         return <div>Not found</div>;
     }
@@ -103,7 +83,7 @@ const App: React.FC = () => {
       <SettingOutlined spin />
     ),
     getItem("About", "1", () => dispatch(changePage(1)), <PieChartOutlined />),
-    getItem("Logout", "6", () => showModal(), <LogoutOutlined spin />),
+    getItem("Logout", "6", () => showModal(), <LogoutOutlined />),
   ];
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -126,16 +106,16 @@ const App: React.FC = () => {
     saveLoginResponse("");
   };
 
-  //if expiresAtToken
-  useEffect(() => {
-    if (getRefreshToken()==="") {
-      handleOk("session expired ");
-    }
-  }, [pageInfo.page]);
-
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+
+  //if token expires
+  useEffect(() => {
+    if (getRefreshToken() === "") {
+      handleOk("session expired ");
+    }
+  }, [pageInfo.page]);
 
   return (
     <Layout style={{ minHeight: "100vh" }}>

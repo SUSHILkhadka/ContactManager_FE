@@ -6,6 +6,8 @@ import { makeLoggedOut } from "../../redux_toolkit/slices/authSlice";
 import { RootState } from "../../redux_toolkit/stores/store";
 import { editUser } from "../../services/backendCallUser";
 import { saveLoginResponse } from "../../services/localStorageAndCookies";
+import editUserSchema from "../../validations/editUserSchema";
+import Validator from "../../validations/Validator";
 import "../styles/Form.css";
 const EditForm: React.FC = () => {
   const [loading, setloading] = useState(false);
@@ -20,26 +22,25 @@ const EditForm: React.FC = () => {
 
   const onFinish = async (values: any) => {
     setloading(true);
-    if (values.newPassword1 === values.newPassword2) {
-      const body = JSON.stringify({
-        name: values.name,
-        password: values.newPassword1,
-        oldPassword: values.oldPassword,
-      });
+    const body = {
+      name: values.name,
+      password: values.newPassword1,
+      confirmPassword: values.newPassword2,
+      oldPassword: values.oldPassword,
+    };
+    try {
+      Validator(body, editUserSchema);
+      const response = await editUser(body);
 
-      try {
-        const response = await editUser(body);
-
-        message.success(`${response.message}`);
-        dispatch(makeLoggedOut());
-        saveLoginResponse("");
-        navigate("/login", { replace: true });
-      } catch (e: any) {
-        message.error("error editing!! " + e.response.data.message);
-      }
-    } else {
-      message.error(`new password and retype new password must match`);
+      message.success(response.message);
+      dispatch(makeLoggedOut());
+      saveLoginResponse("");
+      navigate("/login", { replace: true });
+    } catch (e: any) {
+      if (e.response) message.error(e.response.data.message);
+      else message.error(e);
     }
+
     setloading(false);
   };
 

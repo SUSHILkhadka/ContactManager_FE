@@ -186,7 +186,7 @@ const ContactsTable = (props: propsTypeforContactTable) => {
       title: "Photograph",
       dataIndex: "photograph",
       key: "photograph",
-      width: "20%",
+      width: "100px",
       render: (url: string) => {
         return Boolean(url) ? (
           <img className="img-avatar-table" src={url} alt="Loading" />
@@ -262,20 +262,18 @@ const ContactsTable = (props: propsTypeforContactTable) => {
   ];
 
   return (
-    <div>
-      <div className="table-contact">
-        <Table
-          onRow={(Obj: any, _rowIndex: any) => {
-            return {
-              onDoubleClick: () => handleEdit(Obj),
-            };
-          }}
-          columns={columns}
-          pagination={false}
-          dataSource={props.Obj}
-          rowKey="id"
-        />
-      </div>
+    <div className="table-container">
+      <Table
+        className="actual-table"
+        onRow={(Obj: any, _rowIndex: any) => {
+          return {
+            onDoubleClick: () => handleEdit(Obj),
+          };
+        }}
+        columns={columns}
+        dataSource={props.Obj}
+        rowKey="id"
+      />
     </div>
   );
 };

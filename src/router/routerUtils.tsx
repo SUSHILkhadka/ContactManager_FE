@@ -8,11 +8,7 @@ export const ProtectedRoutes = () => {
   return !(getRefreshToken() === "") ? <Outlet /> : <Navigate to="/login" />;
 };
 
-//login and register route are redirected to home, if user is logged in.
-export const redirectMultiplePaths = (
-  paths: string[],
-  element: JSX.Element
-) =>
+export const redirectMultiplePaths = (paths: string[], element: JSX.Element) =>
   paths.map((path: string) => (
     <Route key={path} path={path} element={element} />
   ));

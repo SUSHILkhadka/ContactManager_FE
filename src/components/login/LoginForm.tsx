@@ -1,11 +1,12 @@
 import { Button, Form, Input, message } from "antd";
-// import Upload from "antd/lib/upload/Upload";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { makeLoggedInWithInfo } from "../../redux_toolkit/slices/authSlice";
 import { login } from "../../services/backendCallUser";
 import { saveLoginResponse } from "../../services/localStorageAndCookies";
+import loginSchema from "../../validations/loginSchema";
+import Validator from "../../validations/Validator";
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
@@ -14,20 +15,24 @@ const LoginForm: React.FC = () => {
   const dispatch = useDispatch();
 
   const onFinish = async (values: any) => {
-    const body = JSON.stringify({
+    setloading(true);
+    const body = {
       email: values.email,
       password: values.password,
-    });
-    setloading(true);
+    };
     try {
+      Validator(body, loginSchema);
       const response = await login(body);
+
       dispatch(makeLoggedInWithInfo(response));
       saveLoginResponse(response);
       navigate("/home");
       message.success(`${response.message}`);
     } catch (e: any) {
-      message.error(e.response.data.message);
+      if (e.response) message.error(e.response.data.message);
+      else message.error(e);
     }
+
     setloading(false);
   };
 
