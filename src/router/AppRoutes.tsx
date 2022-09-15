@@ -2,6 +2,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import BasicLayout from "../layouts/BasicLayout";
+import { AboutPage } from "../pages/about/About";
+import { AddContactPage } from "../pages/contact/AddContactPage";
+import { EditContactPage } from "../pages/contact/EditContactPage";
+import { ListContactPage } from "../pages/contact/ListContactsPage";
+import { EditPage } from "../pages/edit/EditPage";
 import { LoginPage } from "../pages/login/LoginPage";
 import { RegisterPage } from "../pages/register/RegisterPage";
 import { checkToken } from "../redux_toolkit/slices/authSlice";
@@ -26,17 +31,29 @@ function AppRoutes() {
           <>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            {redirectMultiplePaths(["/", "/home"], <Navigate to="/login" />)}
+            <Route path="/about" element={<AboutPage />} />
+
+            {redirectMultiplePaths(
+              ["/", "/list", "/add", "edit", "/settings"],
+              <Navigate to="/login" />
+            )}
             <Route path="*" element={<div>Not found</div>} />
           </>
         ) : (
           <Route path="/" element={<ProtectedRoutes />}>
-            <Route index element={<Navigate to="/home" />} />
-            <Route path="/home" element={<BasicLayout />}></Route>
+            <Route element={<BasicLayout />}>
+              <Route index element={<Navigate to="/list" />} />
+              <Route path="/add" element={<AddContactPage />} />
+              <Route path="/list" element={<ListContactPage />} />
+              <Route path="/edit" element={<EditContactPage />} />
+              <Route path="/settings" element={<EditPage />} />
+              <Route path="/about" element={<AboutPage />} />
+            </Route>
             {redirectMultiplePaths(
               ["/login", "register"],
-              <Navigate to="/home" />
+              <Navigate to="/about" />
             )}
+
             <Route path="*" element={<div>Not found</div>} />
           </Route>
         )}

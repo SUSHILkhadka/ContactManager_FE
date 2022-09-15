@@ -1,10 +1,10 @@
-import { Skeleton, message } from "antd";
+import { message, Skeleton } from "antd";
 import { useEffect, useState } from "react";
 import ContactsTable from "../../components/contact/ContactsTable";
-import { readAllContacts } from "../../services/backendCallContact";
-import { sortByAscendingAll } from "../../utils/sort";
 import CustomSort from "../../components/utils/CustomSort";
 import { IContact } from "../../interface/IContact";
+import { readAllContacts } from "../../services/backendCallContact";
+import { sortByAscendingAll } from "../../utils/sort";
 
 export const ListContactPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -17,12 +17,16 @@ export const ListContactPage = () => {
   };
 
   useEffect(() => {
+    let isCancelled=false;
+
     const getalldata = async () => {
       try {
         const contacts = await readAllContacts();
+        if(!isCancelled){
         const sortedArray = sortByAscendingAll(contacts.data);
         setDataOrignal(sortedArray);
         setDataToDisplay(sortedArray);
+        }
       } catch (e: any) {
         message.error(
           "reading contacts list failed!! " + e.response.data.message
@@ -32,6 +36,10 @@ export const ListContactPage = () => {
       setLoading(false);
     };
     getalldata();
+
+    return ()=>{
+      isCancelled=true;
+    }
   }, [reload]);
 
   return (

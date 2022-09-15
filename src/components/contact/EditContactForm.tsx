@@ -1,11 +1,11 @@
 import { Button, Form, message, Popconfirm } from "antd";
 
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { LIST_CONTACT_PAGE } from "../../constants/common";
-import { changePage } from "../../redux_toolkit/slices/pageSlice";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { RootState } from "../../redux_toolkit/stores/store";
 import { deleteContact, editContact } from "../../services/backendCallContact";
+import { getEditContactBodyFromForm } from "../../utils/converter";
 import contactSchema from "../../validations/contactSchema";
 import Validator from "../../validations/Validator";
 import CustomUpload from "../utils/CustomUpload";
@@ -16,7 +16,7 @@ type SizeType = Parameters<typeof Form>[0]["size"];
 const EditContactForm: React.FC = () => {
   const [loading, setloading] = useState(false);
   const contactInfo = useSelector((state: RootState) => state.contact);
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [componentSize, setComponentSize] = useState<SizeType | "default">(
     "default"
@@ -38,22 +38,17 @@ const EditContactForm: React.FC = () => {
 
   const onFinish = async (values: any) => {
     setloading(true);
-    const body = JSON.stringify({
-      name: values.name,
-      email: values.email,
-      phoneNumber: values.phoneNumber,
-      workNumber: values.workNumber,
-      homeNumber: values.homeNumber,
-      favourite: Boolean(values.favourite),
+    const body = {
+      ...getEditContactBodyFromForm(values),
       photograph: contactInfo.photograph,
-    });
-
+    };
     try {
+      console.log("body = ",body)
       Validator(body, contactSchema);
       const contact = await editContact(body, contactInfo.id);
 
       message.success(`${contact.message}. Id is ${contact.data.id}`);
-      dispatch(changePage(LIST_CONTACT_PAGE));
+      navigate("/list");
     } catch (e: any) {
       if (e.response) message.error(e.response.data.message);
       else message.error(e);
@@ -67,7 +62,7 @@ const EditContactForm: React.FC = () => {
       if (contact.data) {
         message.success(`${contact.message}. Id is ${contact.data.id}`);
       }
-      dispatch(changePage(LIST_CONTACT_PAGE));
+      navigate("/list");
     } catch (e: any) {
       message.error("error deleting!! " + e.response.data.message);
     }

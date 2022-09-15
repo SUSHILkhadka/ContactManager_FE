@@ -1,10 +1,10 @@
 import { Button, Form, message } from "antd";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { LIST_CONTACT_PAGE } from "../../constants/common";
-import { changePage } from "../../redux_toolkit/slices/pageSlice";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { RootState } from "../../redux_toolkit/stores/store";
 import { add } from "../../services/backendCallContact";
+import { getContactBodyFromForm } from "../../utils/converter";
 import contactSchema from "../../validations/contactSchema";
 import Validator from "../../validations/Validator";
 import "../styles/Button.css";
@@ -14,7 +14,8 @@ import BasicContactForm from "./BasicContactForm";
 const AddContactForm: React.FC = () => {
   const [loading, setloading] = useState(false);
   const contactInfo = useSelector((state: RootState) => state.contact);
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const defaultValue = {
     photograph: contactInfo.photograph,
   };
@@ -22,21 +23,17 @@ const AddContactForm: React.FC = () => {
   const onFinish = async (values: any) => {
     setloading(true);
     const body = {
-      name: values.name,
-      email: values.email,
-      phoneNumber: values.phoneNumber,
-      workNumber: values.workNumber,
-      homeNumber: values.homeNumber,
-      favourite: Boolean(values.favourite),
+      ...getContactBodyFromForm(values),
       photograph: contactInfo.photograph,
     };
-
     try {
+      console.log("body = ",body)
+
       Validator(body, contactSchema);
       const contact = await add(body);
       if (contact.data) {
         message.success(`Added contact successfully. Id is ${contact.data.id}`);
-        dispatch(changePage(LIST_CONTACT_PAGE));
+        navigate("/list");
       } else {
         message.error(contact.message);
       }

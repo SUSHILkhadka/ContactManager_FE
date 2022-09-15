@@ -14,11 +14,10 @@ import { ColumnType } from "antd/lib/table";
 import { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import image from "../../assets/github.png";
-import { EDIT_CONTACT_PAGE } from "../../constants/common";
 import { IContact } from "../../interface/IContact";
 import { load } from "../../redux_toolkit/slices/contactSlice";
-import { changePage } from "../../redux_toolkit/slices/pageSlice";
 import { deleteContact, editContact } from "../../services/backendCallContact";
 import "../styles/Table.css";
 
@@ -29,6 +28,7 @@ type propsTypeforContactTable = {
 type DataIndex = keyof IContact;
 const ContactsTable = (props: propsTypeforContactTable) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
@@ -58,7 +58,7 @@ const ContactsTable = (props: propsTypeforContactTable) => {
       favourite: Obj.favourite,
     };
     dispatch(load(dataForContactInfo));
-    dispatch(changePage(EDIT_CONTACT_PAGE));
+    navigate("/edit")
   };
 
   const handleFavouriteChange = async (Obj: IContact) => {
@@ -71,6 +71,7 @@ const ContactsTable = (props: propsTypeforContactTable) => {
       photograph: Obj.photograph,
       favourite: !Obj.favourite,
     };
+
     try {
       const contact = await editContact(body, Obj.id);
       message.success(`${contact.message}. Id is ${contact.data.id}`);

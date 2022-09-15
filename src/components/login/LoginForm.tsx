@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { makeLoggedInWithInfo } from "../../redux_toolkit/slices/authSlice";
 import { login } from "../../services/backendCallUser";
 import { saveLoginResponse } from "../../services/localStorageAndCookies";
+import { getLoginBodyFromForm } from "../../utils/converter";
 import loginSchema from "../../validations/loginSchema";
 import Validator from "../../validations/Validator";
 
@@ -16,17 +17,14 @@ const LoginForm: React.FC = () => {
 
   const onFinish = async (values: any) => {
     setloading(true);
-    const body = {
-      email: values.email,
-      password: values.password,
-    };
+    const body = getLoginBodyFromForm(values);
     try {
       Validator(body, loginSchema);
       const response = await login(body);
 
       dispatch(makeLoggedInWithInfo(response));
       saveLoginResponse(response);
-      navigate("/home");
+      navigate("/",{replace:true});
       message.success(`${response.message}`);
     } catch (e: any) {
       if (e.response) message.error(e.response.data.message);
@@ -81,7 +79,7 @@ const LoginForm: React.FC = () => {
           >
             LogIn
           </Button>
-          <Button onClick={handleClick}>New user?? Register</Button>
+          <Button onClick={handleClick}>New user?? Register Instead</Button>
         </Form.Item>
       </Form>
     </div>

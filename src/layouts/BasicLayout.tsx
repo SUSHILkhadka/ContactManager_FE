@@ -6,23 +6,13 @@ import {
   UserAddOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, MenuProps, message, Modal } from "antd";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { AboutPage } from "../pages/about/About";
-import { AddContactPage } from "../pages/contact/AddContactPage";
-import { EditContactPage } from "../pages/contact/EditContactPage";
-import { ListContactPage } from "../pages/contact/ListContactsPage";
-import { EditPage } from "../pages/edit/EditPage";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Outlet, useNavigate } from "react-router-dom";
 import { makeLoggedOut } from "../redux_toolkit/slices/authSlice";
 import { reset } from "../redux_toolkit/slices/contactSlice";
-import { changePage } from "../redux_toolkit/slices/pageSlice";
-import { RootState } from "../redux_toolkit/stores/store";
 import { logout } from "../services/backendCallUser";
-import {
-  getRefreshToken,
-  saveLoginResponse,
-} from "../services/localStorageAndCookies";
+import { saveLoginResponse } from "../services/localStorageAndCookies";
 import "./Layout.css";
 
 const { Content, Footer, Sider } = Layout;
@@ -47,42 +37,24 @@ function getItem(
 
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const pageInfo = useSelector((state: RootState) => state.page);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const body = () => {
-    switch (pageInfo.page) {
-      case 1:
-        return <AboutPage />;
-      case 2:
-        return <ListContactPage />;
-      case 3:
-        return <AddContactPage />;
-      case 4:
-        return <EditPage />;
-      case 5:
-        return <EditContactPage />;
-      default:
-        return <div>Not found</div>;
-    }
-  };
 
   const items: MenuItem[] = [
     getItem(
       "Create New Contact",
       "3",
-      () => dispatch(changePage(3)),
+      () => navigate("/add"),
       <UserAddOutlined />
     ),
-    getItem("Contacts", "2", () => dispatch(changePage(2)), <ContactsFilled />),
+    getItem("Contacts", "2", () => navigate("/list"), <ContactsFilled />),
     getItem(
       "Settings",
       "4",
-      () => dispatch(changePage(4)),
+      () => navigate("/settings"),
       <SettingOutlined spin />
     ),
-    getItem("About", "1", () => dispatch(changePage(1)), <PieChartOutlined />),
+    getItem("About", "1", () => navigate("/about"), <PieChartOutlined />),
     getItem("Logout", "6", () => showModal(), <LogoutOutlined />),
   ];
 
@@ -110,13 +82,6 @@ const App: React.FC = () => {
     setIsModalVisible(false);
   };
 
-  //if token expires
-  useEffect(() => {
-    if (getRefreshToken() === "") {
-      handleOk("session expired ");
-    }
-  }, [pageInfo.page]);
-
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
@@ -127,13 +92,16 @@ const App: React.FC = () => {
         <div className="logo" />
         <Menu
           theme="dark"
-          defaultSelectedKeys={[`${pageInfo.page}`]}
+          // defaultSelectedKeys={[`${pageInfo.page}`]}
           mode="inline"
           items={items}
         />
       </Sider>
       <Layout className="site-layout">
-        <Content style={{ margin: "0.5rem 1rem" }}>{body()}</Content>
+        <Content style={{ margin: "0.5rem 1rem" }}>
+          <Outlet />
+        </Content>
+
         <Footer style={{ textAlign: "center" }}>
           Contact Management ©2022
         </Footer>

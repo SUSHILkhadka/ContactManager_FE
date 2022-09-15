@@ -6,6 +6,7 @@ import { makeLoggedOut } from "../../redux_toolkit/slices/authSlice";
 import { RootState } from "../../redux_toolkit/stores/store";
 import { editUser } from "../../services/backendCallUser";
 import { saveLoginResponse } from "../../services/localStorageAndCookies";
+import { getEditBodyFromForm } from "../../utils/converter";
 import editUserSchema from "../../validations/editUserSchema";
 import Validator from "../../validations/Validator";
 import "../styles/Form.css";
@@ -22,12 +23,7 @@ const EditForm: React.FC = () => {
 
   const onFinish = async (values: any) => {
     setloading(true);
-    const body = {
-      name: values.name,
-      password: values.newPassword1,
-      confirmPassword: values.newPassword2,
-      oldPassword: values.oldPassword,
-    };
+    const body = getEditBodyFromForm(values)
     try {
       Validator(body, editUserSchema);
       const response = await editUser(body);

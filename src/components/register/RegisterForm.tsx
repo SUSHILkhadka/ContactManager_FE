@@ -2,6 +2,7 @@ import { Button, Form, Input, message } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../services/backendCallUser";
+import { getRegisterBodyFromForm } from "../../utils/converter";
 import registerSchema from "../../validations/registerSchema";
 import Validator from "../../validations/Validator";
 import "../styles/App.css";
@@ -11,12 +12,7 @@ const RegisterForm: React.FC = () => {
 
   const onFinish = async (values: any) => {
     setloading(true);
-    const body = {
-      name: values.name,
-      email: values.email,
-      password: values.password,
-      confirmPassword: values.confirmPassword,
-    };
+    const body = getRegisterBodyFromForm(values)
     try {
       Validator(body, registerSchema);
       const response = await register(body);
