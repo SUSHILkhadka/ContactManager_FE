@@ -33,7 +33,8 @@ const CustomUpload: React.FC = () => {
     showUploadList: false,
   };
   return (
-    <>
+    <div className="customPhotoUploader">
+      <div className="image-container">
       {Boolean(contactInfo.photograph) ? (
         <img
           className="img-avatar"
@@ -43,6 +44,8 @@ const CustomUpload: React.FC = () => {
       ) : (
         <img className="img-avatar" src={image} alt="loading" />
       )}
+      </div>
+      <div className="changePhoto-containter">
       <ImgCrop rotate>
         <Upload {...props}>
           {loading ? (
@@ -50,18 +53,18 @@ const CustomUpload: React.FC = () => {
               className="btn btn-photo"
               type="primary"
               loading={loading}
-              style={{ marginTop: 16 }}
             >
-              'Uploading'
+              Uploading..
             </Button>
           ) : (
-            <Button type="primary" className="btn btn-photo">
+            <Button className=" btn-photo">
               Change Photo
             </Button>
           )}
         </Upload>
       </ImgCrop>
-    </>
+      </div>
+    </div>
   );
 };
 

@@ -1,7 +1,4 @@
-.btn-photo:hover {
-  background-color: rgb(123, 71, 245);
-  color: black;
-}
+
 .btn {
   background-color: #00152d;
 padding: 0.4rem 0.8rem;
@@ -26,22 +23,31 @@ margin-bottom: 0rem;
   color: aqua;
 }
 
-/* .btn-addcontact {
-  margin-bottom: 3rem;
-  margin-left: 4rem;
-} */
-
-/* .ant-btn-primary {
-  background-color: #00152d;
-  border-radius: 8px;
-}
-.ant-btn-default {
-  border-radius: 10px;
-  border: 2px solid #00152d;
-} */
-
-
-
 .ant-btn {
   height: auto;
+}
+.customPhotoUploader{
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.changePhoto-containter{
+
+position: absolute;
+top: 50%;  /* position the top  edge of the element at the middle of the parent */
+left: 50%; /* position the left edge of the element at the middle of the parent */
+
+transform: translate(-50%, 300%); 
+}
+.btn-photo {
+  background-color: rgb(123, 71, 245);
+  border-radius: 20px;
+  opacity: 0.7;
+  color: black;
+  padding: 0.1rem;
+}
+.btn-photo:hover {
+  background-color: rgb(123, 71, 245);
+  color: black;
 }

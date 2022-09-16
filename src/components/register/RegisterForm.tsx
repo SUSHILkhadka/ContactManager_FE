@@ -12,7 +12,7 @@ const RegisterForm: React.FC = () => {
 
   const onFinish = async (values: any) => {
     setloading(true);
-    const body = getRegisterBodyFromForm(values)
+    const body = getRegisterBodyFromForm(values);
     try {
       Validator(body, registerSchema);
       const response = await register(body);
@@ -31,23 +31,23 @@ const RegisterForm: React.FC = () => {
   };
 
   return (
-    <div className="form form-login">
+    <div className="form-container2">
       <Form
         name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
         autoComplete="off"
       >
         <Form.Item
+          className="form-single "
           label="User Name"
           name="name"
           rules={[{ required: true, message: "Please input your username!" }]}
         >
-          <Input className="form-input" />
+          <Input className="form-input2" />
         </Form.Item>
         <Form.Item
+          className="form-single "
           label="Email"
           name="email"
           rules={[
@@ -58,27 +58,39 @@ const RegisterForm: React.FC = () => {
             },
           ]}
         >
-          <Input className="form-input" />
+          <Input className="form-input2" />
         </Form.Item>
 
         <Form.Item
+          className="form-single "
           label="Password"
           name="password"
           rules={[{ required: true, message: "Please input your password!" }]}
         >
-          <Input.Password className="form-input" />
+          <Input.Password className="form-input2" />
         </Form.Item>
         <Form.Item
+          className="form-single "
           label="Confirm Password"
           name="confirmPassword"
           rules={[
             { required: true, message: "Please input confirmation password!" },
           ]}
         >
-          <Input.Password className="form-input" />
+          <Input.Password className="form-input2" />
+        </Form.Item>
+        <Form.Item
+          className="form-single "
+          label="Confirm Password"
+          name="confirmPassword"
+          rules={[
+            { required: true, message: "Please input confirmation password!" },
+          ]}
+        >
+          <Input className="form-input2" />
         </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Form.Item className="form-button-register">
           <Button
             type="primary"
             htmlType="submit"
@@ -87,6 +99,8 @@ const RegisterForm: React.FC = () => {
           >
             Register
           </Button>
+        </Form.Item>
+        <Form.Item className="form-button-register">
           <Button onClick={handleClick}>Already has account?? Login </Button>
         </Form.Item>
       </Form>

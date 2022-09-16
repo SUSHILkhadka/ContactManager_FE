@@ -41,19 +41,22 @@ const EditForm: React.FC = () => {
   };
 
   return (
-    <div className="form form-edit">
+    <div className="form-container2">
       <Form
         name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
         initialValues={initialValue}
         onFinish={onFinish}
         autoComplete="off"
       >
-        <Form.Item label="Email" name="email">
+        <Form.Item 
+          className="form-single "
+
+         label="Email" name="email">
           <Input className="form-input" disabled />
         </Form.Item>
         <Form.Item
+          className="form-single "
+
           label="User Name"
           name="name"
           rules={[{ required: true, message: "Please input your username!" }]}
@@ -62,6 +65,7 @@ const EditForm: React.FC = () => {
         </Form.Item>
 
         <Form.Item
+          className="form-single "
           label="Old Password"
           name="oldPassword"
           rules={[{ required: true, message: "Please input your password!" }]}
@@ -70,6 +74,7 @@ const EditForm: React.FC = () => {
         </Form.Item>
 
         <Form.Item
+          className="form-single "
           label="New Password"
           name="newPassword1"
           rules={[{ required: true, message: "Please input your password!" }]}
@@ -77,6 +82,7 @@ const EditForm: React.FC = () => {
           <Input.Password className="form-input" />
         </Form.Item>
         <Form.Item
+          className="form-single "
           label="Retype New Password"
           name="newPassword2"
           rules={[{ required: true, message: "Please input your password!" }]}
@@ -84,8 +90,9 @@ const EditForm: React.FC = () => {
           <Input.Password className="form-input" />
         </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Form.Item  className="form-button-register">
           <Button
+          
             className="btn"
             type="primary"
             htmlType="submit"

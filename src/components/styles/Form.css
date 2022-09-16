@@ -6,8 +6,7 @@
 }
 .form-container{
   display: flex;
-  width: 80%;
-  margin-top: 10rem;
+  justify-content: center;
   margin: auto;
 }
 
@@ -18,10 +17,37 @@
 .form-wholefield {
   display: flex;
   justify-content: space-around;
-  height: 100px;
-
 }
 .form-input {
   width: 100%;
   border-radius: 10px;
+}
+.form-container2{
+  margin: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.form-single{
+  display: flex;
+  justify-content: right;
+  width: 100%;
+
+}
+.form-input2 {
+  width: 100%;
+  border-radius: 10px;
+  margin:0rem 1rem;
+  justify-self: left;
+}
+
+.ant-input-suffix {
+  margin-left: 4px;
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+}
+.form-button-register{
+  display: flex;
+  justify-content: center;
 }

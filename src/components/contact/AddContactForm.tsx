@@ -47,12 +47,10 @@ const AddContactForm: React.FC = () => {
       <div className="center">
         <UploadImage />
       </div>
-      <div className="contact-form">
+      <div className="form-container">
         <Form
           className="form"
-          labelCol={{ span: 4 }}
-          wrapperCol={{ span: 14 }}
-          layout="horizontal"
+          layout="vertical"
           initialValues={defaultValue}
           onFinish={onFinish}
         >

@@ -6,13 +6,11 @@ export const store = configureStore({
     auth: authReducer,
     contact: contactReducer,
   },
+  //if dispatch isnot receiving action.payload proper in proper format
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
     }),
-  // middleware: getDefaultMiddleware({
-  //   serializableCheck: false,
-  // }),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

@@ -48,7 +48,6 @@ instance.interceptors.response.use(
         err.response.data.message === "invalid access token"
       ) {
         // Access Token was expired
-
         originalConfig._retry = true;
         try {
           const rs = await instance.post("/token", {
@@ -65,7 +64,7 @@ instance.interceptors.response.use(
         !originalConfig._retry &&
         err.response.data.message === "invalid refresh token"
       ) {
-        console.log('sdfsdf')
+        //refresh token was invalid
         saveLoginResponse("");
       }
     }

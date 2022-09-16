@@ -39,16 +39,16 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <div className="form form-login">
+    <div className="form-container2">
       <Form
         name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
         autoComplete="off"
       >
         <Form.Item
+          className="form-single "
+
           label="Email"
           name="email"
           rules={[
@@ -63,6 +63,8 @@ const LoginForm: React.FC = () => {
         </Form.Item>
 
         <Form.Item
+          className="form-single "
+
           label="Password"
           name="password"
           rules={[{ required: true, message: "Please input your password!" }]}
@@ -70,7 +72,10 @@ const LoginForm: React.FC = () => {
           <Input.Password className="form-input" />
         </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Form.Item 
+          className="form-button-register"
+
+        >
           <Button
             type="primary"
             htmlType="submit"
@@ -79,6 +84,12 @@ const LoginForm: React.FC = () => {
           >
             LogIn
           </Button>
+        </Form.Item>
+          
+        <Form.Item 
+          className="form-button-register"
+
+        >
           <Button onClick={handleClick}>New user?? Register Instead</Button>
         </Form.Item>
       </Form>
