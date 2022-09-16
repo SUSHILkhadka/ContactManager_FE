@@ -27,8 +27,6 @@ const AddContactForm: React.FC = () => {
       photograph: contactInfo.photograph,
     };
     try {
-      console.log("body = ",body)
-
       Validator(body, contactSchema);
       const contact = await add(body);
       if (contact.data) {

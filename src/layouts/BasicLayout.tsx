@@ -8,7 +8,7 @@ import {
 import { Layout, Menu, MenuProps, message, Modal } from "antd";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { makeLoggedOut } from "../redux_toolkit/slices/authSlice";
 import { reset } from "../redux_toolkit/slices/contactSlice";
 import { logout } from "../services/backendCallUser";
@@ -92,7 +92,6 @@ const App: React.FC = () => {
         <div className="logo" />
         <Menu
           theme="dark"
-          // defaultSelectedKeys={[`${pageInfo.page}`]}
           mode="inline"
           items={items}
         />

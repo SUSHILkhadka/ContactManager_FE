@@ -4,40 +4,48 @@ import "../styles/Form.css";
 const BasicContactForm = () => {
   return (
     <div className="form form-contact">
-      <Form.Item
-        label="Name"
-        name="name"
-        rules={[{ required: true, message: "Please input contact's name!" }]}
-      >
-        <Input className="form-input" />
-      </Form.Item>
+      <div className="form-row">
+        <Form.Item
+          className="form-wholefield"
+          label="Name"
+          name="name"
+          rules={[{ required: true, message: "Please input contact's name!" }]}
+        >
+          <Input className="form-input" />
+        </Form.Item>
 
-      <Form.Item
-        rules={[
-          {
-            type: "email",
-            message: "Please input valid email!",
-          },
-        ]}
-        label="Email"
-        name="email"
-      >
-        <Input className="form-input" />
-      </Form.Item>
+        <Form.Item
+          className="form-wholefield"
+          rules={[
+            {
+              type: "email",
+              message: "Please input valid email!",
+            },
+          ]}
+          label="Email"
+          name="email"
+        >
+          <Input className="form-input" />
+        </Form.Item>
+      </div>
 
-      <Form.Item label="Phone number" name="phoneNumber">
+      <div className="form-row">
+
+      <Form.Item className="form-wholefield" label="Phone number" name="phoneNumber">
         <Input addonBefore={<PhoneOutlined spin />} className="form-input" />
       </Form.Item>
 
-      <Form.Item label="Work Number" name="workNumber">
+      <Form.Item className="form-wholefield" label="Work Number" name="workNumber">
         <Input addonBefore={<LaptopOutlined />} className="form-input" />
       </Form.Item>
 
-      <Form.Item label="Home Number" name="homeNumber">
+      <Form.Item className="form-wholefield" label="Home Number" name="homeNumber">
         <Input addonBefore={<HomeOutlined />} className="form-input" />
       </Form.Item>
+      </div>
 
       <Form.Item
+          className="form-wholefield"
         label="Add to Favourite"
         name="favourite"
         valuePropName="checked"

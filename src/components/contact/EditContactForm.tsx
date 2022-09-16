@@ -10,21 +10,16 @@ import contactSchema from "../../validations/contactSchema";
 import Validator from "../../validations/Validator";
 import CustomUpload from "../utils/CustomUpload";
 import BasicContactForm from "./BasicContactForm";
+import "../styles/Form.css";
 
-type SizeType = Parameters<typeof Form>[0]["size"];
 
 const EditContactForm: React.FC = () => {
   const [loading, setloading] = useState(false);
   const contactInfo = useSelector((state: RootState) => state.contact);
   const navigate = useNavigate();
 
-  const [componentSize, setComponentSize] = useState<SizeType | "default">(
-    "default"
-  );
 
-  const onFormLayoutChange = ({ size }: { size: SizeType }) => {
-    setComponentSize(size);
-  };
+
   const defaultValue = {
     id: contactInfo.id,
     name: contactInfo.name,
@@ -43,7 +38,6 @@ const EditContactForm: React.FC = () => {
       photograph: contactInfo.photograph,
     };
     try {
-      console.log("body = ",body)
       Validator(body, contactSchema);
       const contact = await editContact(body, contactInfo.id);
 
@@ -56,36 +50,25 @@ const EditContactForm: React.FC = () => {
     setloading(false);
   };
 
-  const handleDelete = async (_values: any) => {
-    try {
-      const contact = await deleteContact(contactInfo.id);
-      if (contact.data) {
-        message.success(`${contact.message}. Id is ${contact.data.id}`);
-      }
-      navigate("/list");
-    } catch (e: any) {
-      message.error("error deleting!! " + e.response.data.message);
-    }
-  };
 
   return (
     <div>
       <div className="center">
         <CustomUpload />
       </div>
+    <div className="form-container">
+
       <Form
-        className="form"
-        labelCol={{ span: 4 }}
-        wrapperCol={{ span: 14 }}
-        layout="horizontal"
+        layout="vertical"
         initialValues={defaultValue}
-        onValuesChange={onFormLayoutChange}
-        size={componentSize as SizeType}
         onFinish={onFinish}
       >
         <BasicContactForm />
 
-        <Form.Item label="Save">
+        <div className="form-row">
+
+         
+        <Form.Item  className="form-wholefield"  >
           <Button
             type="primary"
             htmlType="submit"
@@ -94,18 +77,10 @@ const EditContactForm: React.FC = () => {
           >
             Save changes to Contact
           </Button>
-
-          <Popconfirm
-            placement="top"
-            title={"Are you sure?"}
-            onConfirm={handleDelete}
-            okText="Yes"
-            cancelText="No"
-          >
-            <Button className="btn btn-delete">Delete from database</Button>
-          </Popconfirm>
-        </Form.Item>
+          </Form.Item>
+      </div>
       </Form>
+      </div>
     </div>
   );
 };

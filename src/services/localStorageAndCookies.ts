@@ -20,6 +20,7 @@ export function saveAccessToken(response: string) {
  */
 export function getAccessToken(): string {
   const obj = Cookies.get("accessToken");
+  if(obj==="undefined")return ""
   return obj ? obj : "";
 }
 /**
@@ -38,5 +39,6 @@ export function saveRefreshToken(response: string, date?: any) {
  */
 export function getRefreshToken(): string {
   const obj = Cookies.get("refreshToken");
+  if(obj==="undefined")return ""
   return obj ? obj : "";
 }

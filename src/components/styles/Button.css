@@ -4,12 +4,21 @@
 }
 .btn {
   background-color: #00152d;
-
+padding: 0.4rem 0.8rem;
+box-sizing: border-box;
   border-radius: 10px;
+}
+.btn-login {
+  z-index: 2;
+  font-size: 20px;
+  width: 30%;
+  margin: 1rem;
+margin-bottom: 0rem;
+  padding: 1rem;
+  box-sizing: content-box;
 }
 .btn:hover {
   background-color: #0090ff;
-
   color: white;
 }
 .btn-delete {
@@ -17,16 +26,22 @@
   color: aqua;
 }
 
-.btn-addcontact {
+/* .btn-addcontact {
   margin-bottom: 3rem;
   margin-left: 4rem;
-}
+} */
 
-.ant-btn-primary {
+/* .ant-btn-primary {
   background-color: #00152d;
   border-radius: 8px;
 }
 .ant-btn-default {
   border-radius: 10px;
   border: 2px solid #00152d;
+} */
+
+
+
+.ant-btn {
+  height: auto;
 }

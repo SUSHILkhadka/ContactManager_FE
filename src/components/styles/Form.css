@@ -1,8 +1,27 @@
 .form {
   margin: 2rem 1rem;
   /* align-items: left; */
+  display: flex;
+  flex-direction: column;
+}
+.form-container{
+  display: flex;
+  width: 80%;
+  margin-top: 10rem;
+  margin: auto;
 }
 
+.form-row {
+  display: flex;
+  justify-content: space-around;
+}
+.form-wholefield {
+  display: flex;
+  justify-content: space-around;
+  height: 100px;
+
+}
 .form-input {
-  width: 50%;
+  width: 100%;
+  border-radius: 10px;
 }
