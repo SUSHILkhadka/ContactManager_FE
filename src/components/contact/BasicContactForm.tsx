@@ -11,7 +11,7 @@ const BasicContactForm = () => {
           name="name"
           rules={[{ required: true, message: "Please input contact's name!" }]}
         >
-          <Input className="form-input" />
+          <Input className="form-input-half" />
         </Form.Item>
 
         <Form.Item
@@ -25,7 +25,7 @@ const BasicContactForm = () => {
           label="Email"
           name="email"
         >
-          <Input className="form-input" />
+          <Input className="form-input-half" />
         </Form.Item>
       </div>
 
@@ -44,14 +44,17 @@ const BasicContactForm = () => {
       </Form.Item>
       </div>
 
+      <div className="form-row">
       <Form.Item
           className="form-wholefield"
-        label="Add to Favourite"
+        label="Add to Favourites"
         name="favourite"
         valuePropName="checked"
       >
         <Switch className="form-input-switch" />
       </Form.Item>
+      </div>
+
     </div>
   );
 };

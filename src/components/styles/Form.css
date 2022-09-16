@@ -16,36 +16,46 @@
 }
 .form-wholefield {
   display: flex;
-  justify-content: space-around;
+  justify-self: right;
+
 }
+
 .form-input {
   width: 100%;
   border-radius: 10px;
 }
-.form-input-switch {
-  width: 50%;
+.form-input-half {
+  width: 110%;
   border-radius: 10px;
+}
+.form-input-switch {
+  width: 10%;
+  margin-left:2rem;
+}
+.ant-row {
   display: flex;
-  justify-content: center;
-  margin-left:1rem;
+  flex-flow: row wrap;
+  min-width: 0;
+  width: 100%;
 }
 .form-container2{
-  margin: 2rem;
   width: 100%;
   display: flex;
   justify-content: center;
+}
+.form-antd-form{
+  display: flex;
+  flex-direction: column;
+  width: 35%;
 }
 .form-single{
   display: flex;
-  justify-content: right;
+  justify-content: left;
   width: 100%;
-
 }
 .form-input2 {
-  width: 100%;
   border-radius: 10px;
-  margin:0rem 1rem;
-  justify-self: left;
+  width: 100%;
 }
 
 .ant-input-suffix {
@@ -57,4 +67,6 @@
 .form-button-register{
   display: flex;
   justify-content: center;
+  justify-self: center;
+  text-align: center;
 }

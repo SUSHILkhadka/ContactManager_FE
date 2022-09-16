@@ -63,6 +63,8 @@
   margin-left: 2rem;
 }
 
+.header-title {
+}
 .ant-popover-message > .anticon {
   color: red !important;
 }

@@ -43,7 +43,7 @@ export const ListContactPage = () => {
   }, [reload]);
 
   return (
-    <div>
+    <div className="list-page">
       <div className="dropdown-menu">
         <CustomSort
           dataOriginal={dataOriginal}

@@ -12,7 +12,7 @@ function App() {
           <span className="header-logo">
             <Icon component={ReactLogo} />
           </span>
-          <span>CONTACT MANAGER</span>
+          <span className="header-title">CONTACT MANAGER</span>
         </div>
       </div>
       <AppRoutes />

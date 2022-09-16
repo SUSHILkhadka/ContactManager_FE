@@ -47,6 +47,8 @@ const EditForm: React.FC = () => {
         initialValues={initialValue}
         onFinish={onFinish}
         autoComplete="off"
+        layout="vertical"
+        className="form-antd-form"
       >
         <Form.Item 
           className="form-single "

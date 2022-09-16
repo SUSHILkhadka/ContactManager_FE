@@ -65,9 +65,9 @@ const ContactsTable = (props: propsTypeforContactTable) => {
     const body = {
       name: Obj.name,
       email: Obj.email,
-      workNumber: Obj.workNumber,
-      homeNumber: Obj.homeNumber,
-      phoneNumber: Obj.phoneNumber,
+      workNumber: Obj.workNumber?Obj.workNumber:"",
+      homeNumber: Obj.homeNumber?Obj.homeNumber:"",
+      phoneNumber: Obj.phoneNumber?Obj.phoneNumber:"",
       photograph: Obj.photograph,
       favourite: !Obj.favourite,
     };
@@ -181,13 +181,13 @@ const ContactsTable = (props: propsTypeforContactTable) => {
         text
       ),
   });
-
+const width="10%"
   const columns: ColumnsType<IContact> = [
     {
       title: "Photograph",
       dataIndex: "photograph",
       key: "photograph",
-      width: "100px",
+      width: width,
       render: (url: string) => {
         return Boolean(url) ? (
           <img className="img-avatar-table" src={url} alt="Loading" />
@@ -200,6 +200,7 @@ const ContactsTable = (props: propsTypeforContactTable) => {
       title: "Name",
       dataIndex: "name",
       key: "name",
+      width: width,
       render: (text) => <a>{text}</a>,
       ...getColumnSearchProps("name"),
     },
@@ -207,6 +208,7 @@ const ContactsTable = (props: propsTypeforContactTable) => {
       title: "Email",
       dataIndex: "email",
       key: "email",
+      width: width,
       render: (text) => <a>{text}</a>,
       ...getColumnSearchProps("email"),
     },
@@ -214,18 +216,21 @@ const ContactsTable = (props: propsTypeforContactTable) => {
       title: "Phone Number",
       dataIndex: "phoneNumber",
       key: "phoneNumber",
+      width: width,
       ...getColumnSearchProps("phoneNumber"),
     },
     {
       title: "Work Number",
       dataIndex: "workNumber",
       key: "workNumber",
+      width: width,
       ...getColumnSearchProps("workNumber"),
     },
     {
       title: "Favourite",
       dataIndex: "favourite",
       key: "favourite",
+      width: width,
       render: (text: boolean, contact) => {
         return (
           <div
@@ -235,7 +240,7 @@ const ContactsTable = (props: propsTypeforContactTable) => {
             {!text ? (
               <StarOutlined />
             ) : (
-              <StarFilled style={{ color: "gold" }} />
+              <StarFilled style={{ color: "firebrick" }} />
             )}
           </div>
         );

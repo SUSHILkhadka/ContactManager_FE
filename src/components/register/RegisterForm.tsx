@@ -37,6 +37,8 @@ const RegisterForm: React.FC = () => {
         initialValues={{ remember: true }}
         onFinish={onFinish}
         autoComplete="off"
+        layout="vertical"
+        className="form-antd-form"
       >
         <Form.Item
           className="form-single "
