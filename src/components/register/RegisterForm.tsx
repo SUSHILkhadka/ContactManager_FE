@@ -79,16 +79,6 @@ const RegisterForm: React.FC = () => {
         >
           <Input.Password className="form-input2" />
         </Form.Item>
-        <Form.Item
-          className="form-single "
-          label="Confirm Password"
-          name="confirmPassword"
-          rules={[
-            { required: true, message: "Please input confirmation password!" },
-          ]}
-        >
-          <Input className="form-input2" />
-        </Form.Item>
 
         <Form.Item className="form-button-register">
           <Button

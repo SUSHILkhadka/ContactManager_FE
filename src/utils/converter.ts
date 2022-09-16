@@ -1,26 +1,26 @@
 export const getContactBodyFromForm = (values: any) => {
   const body = {
-    name: values.name,
+    name: values.name.trim(),
     email: values.email,
-    phoneNumber: values.phoneNumber,
-    workNumber: values.workNumber,
-    homeNumber: values.homeNumber,
+    phoneNumber: values.phoneNumber?values.phoneNumber.trim():'',
+    workNumber: values.workNumber?values.workNumber.trim():'',
+    homeNumber: values.homeNumber?values.homeNumber.trim():'',
     favourite: Boolean(values.favourite),
   };
   return body;
 };
 
 export const getEditContactBodyFromForm = (values: any) => {
-    const body = {
-        name: values.name,
-        email: values.email,
-        phoneNumber: values.phoneNumber,
-        workNumber: values.workNumber,
-        homeNumber: values.homeNumber,
-        favourite: Boolean(values.favourite),
-      };
-    return body;
+  const body = {
+    name: values.name.trim(),
+    email: values.email,
+    phoneNumber: values.phoneNumber?values.phoneNumber.trim():'',
+    workNumber: values.workNumber?values.workNumber.trim():'',
+    homeNumber: values.homeNumber?values.homeNumber.trim():'',
+    favourite: Boolean(values.favourite),
   };
+  return body;
+};
 
 export const getLoginBodyFromForm = (values: any) => {
   const body = {
@@ -32,7 +32,7 @@ export const getLoginBodyFromForm = (values: any) => {
 
 export const getRegisterBodyFromForm = (values: any) => {
   const body = {
-    name: values.name,
+    name: values.name.trim(),
     email: values.email,
     password: values.password,
     confirmPassword: values.confirmPassword,
@@ -40,14 +40,12 @@ export const getRegisterBodyFromForm = (values: any) => {
   return body;
 };
 
-
 export const getEditBodyFromForm = (values: any) => {
-    const body = {
-        name: values.name,
-        password: values.newPassword1,
-        confirmPassword: values.newPassword2,
-        oldPassword: values.oldPassword,
-      };
-    return body;
+  const body = {
+    name: values.name.trim(),
+    password: values.newPassword1,
+    confirmPassword: values.newPassword2,
+    oldPassword: values.oldPassword,
   };
-  
+  return body;
+};

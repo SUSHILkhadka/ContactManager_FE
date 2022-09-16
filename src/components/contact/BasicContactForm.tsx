@@ -50,7 +50,7 @@ const BasicContactForm = () => {
         name="favourite"
         valuePropName="checked"
       >
-        <Switch />
+        <Switch className="form-input-switch" />
       </Form.Item>
     </div>
   );
