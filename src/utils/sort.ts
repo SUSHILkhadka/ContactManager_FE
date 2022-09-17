@@ -11,7 +11,6 @@ export const sortByAscendingAll = (dataOriginal: IContact[]) => {
   });
   return temp;
 };
-
 export const sortByDescendingAll = (dataOriginal: IContact[]) => {
   const temp = Object.create(dataOriginal);
   temp.sort(function (a: IContact, b: IContact) {
@@ -33,7 +32,9 @@ export const sortByAscendingFavouritesOnly = (dataOriginal: IContact[]) => {
   return listOfFavourite;
 };
 
-export const sortByAscendingFavouritesFirstThenRest = (dataOriginal: IContact[]) => {
+export const sortByAscendingFavouritesFirstThenRest = (
+  dataOriginal: IContact[]
+) => {
   const temp = dataOriginal;
   const listOfFavourite: IContact[] = [];
   const listofNonFavourite: IContact[] = [];

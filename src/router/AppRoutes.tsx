@@ -9,6 +9,7 @@ import { ListContactPage } from "../pages/contact/ListContactsPage";
 import { EditPage } from "../pages/edit/EditPage";
 import { LoginPage } from "../pages/login/LoginPage";
 import { RegisterPage } from "../pages/register/RegisterPage";
+import SplashScreen from "../pages/SplashScreen";
 import { checkToken } from "../redux_toolkit/slices/authSlice";
 import { AppDispatch, RootState } from "../redux_toolkit/stores/store";
 import { ProtectedRoutes, redirectMultiplePaths } from "./routerUtils";
@@ -21,7 +22,7 @@ function AppRoutes() {
     dispatch(checkToken());
   }, []);
   if (authInfo.status == "loading") {
-    return <div>SplashScreen</div>;
+    return <SplashScreen />;
   }
 
   return (
