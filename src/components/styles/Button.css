@@ -1,15 +1,21 @@
-.btn-photo:hover {
-  background-color: rgb(123, 71, 245);
-  color: black;
-}
+
 .btn {
   background-color: #00152d;
-
+padding: 0.4rem 0.8rem;
+box-sizing: border-box;
   border-radius: 10px;
+}
+.btn-login {
+  z-index: 2;
+  font-size: 20px;
+  width: 30%;
+  margin: 1rem;
+margin-bottom: 0rem;
+  padding: 1rem;
+  box-sizing: content-box;
 }
 .btn:hover {
   background-color: #0090ff;
-
   color: white;
 }
 .btn-delete {
@@ -17,16 +23,32 @@
   color: aqua;
 }
 
-.btn-addcontact {
-  margin-bottom: 3rem;
-  margin-left: 4rem;
+.ant-btn {
+  height: auto;
+}
+.customPhotoUploader{
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
 
-.ant-btn-primary {
-  background-color: #00152d;
-  border-radius: 8px;
+.changePhoto-containter{
+
+position: absolute;
+top: 50%;  /* position the top  edge of the element at the middle of the parent */
+left: 50%; /* position the left edge of the element at the middle of the parent */
+
+transform: translate(-50%, 200%); 
 }
-.ant-btn-default {
-  border-radius: 10px;
-  border: 2px solid #00152d;
+.btn-photo {
+  background-color: rgb(123, 71, 245);
+  border-radius: 20px;
+  opacity: 0.7;
+  color: black;
+  padding: 0.1rem;
+}
+.btn-photo:hover {
+  background-color: rgb(123, 71, 245);
+  border: firebrick solid 1px;
+  color: black;
 }

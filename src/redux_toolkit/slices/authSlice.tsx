@@ -1,53 +1,60 @@
-import { createSlice } from '@reduxjs/toolkit';
-export interface IAuth {
-  login: boolean;
-  id: number;
-  username: string;
-  email: string;
-  password: string;
-  accessToken: string;
-  refreshToken: string;
-}
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { IAuth } from "../../interface/IAuth";
+import instance from "../../services/api";
+import { getRefreshToken } from "../../services/localStorageAndCookies";
 
 const defaultValue: IAuth = {
-  login: false,
   id: 0,
-  username: '',
-  email: '',
-  password: '',
-  accessToken: '',
-  refreshToken: '',
+  username: "",
+  email: "",
+  status: "loading",
 };
 
+export const checkToken = createAsyncThunk(
+  "authInfo/checkRefreshToken",
+  async (): Promise<any> => {
+    const response = await instance.post("/token", {
+      refreshToken: getRefreshToken(),
+    });
+    return response.data;
+  }
+);
 export const authSlice = createSlice({
-  name: 'authInfo',
+  name: "authInfo",
   initialState: defaultValue,
   reducers: {
-    makeLoggedIn: (state) => {
-      state.login = true;
-    },
     makeLoggedInWithInfo: (state, action) => {
-      state.login = true;
       state.id = action.payload.data.id;
       state.username = action.payload.data.name;
       state.email = action.payload.data.email;
-      state.password = action.payload.data.password;
-      state.accessToken = action.payload.accessToken;
-      state.refreshToken = action.payload.refreshToken;
+      state.status = "fulfilled";
     },
     makeLoggedOut: (state) => {
-      state.login = false;
-      state.username = '';
-      state.email = '';
-      state.password = '';
-      state.accessToken = '';
+      state.id = 0;
+      state.username = "";
+      state.email = "";
+      state.status = "rejected";
     },
-    changeName: (state, action) => {
-      state.username = action.payload.name;
-      state.password = action.payload.password;
-    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(checkToken.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(checkToken.fulfilled, (state, action) => {
+        state.status = "fulfilled";
+        state.id = action.payload.data.id;
+        state.username = action.payload.data.name;
+        state.email = action.payload.data.email;
+      })
+      .addCase(checkToken.rejected, (state) => {
+        state.status = "rejected";
+        state.id = 0;
+        state.username = "";
+        state.email = "";
+      });
   },
 });
 
-export const { makeLoggedIn, makeLoggedInWithInfo, makeLoggedOut } = authSlice.actions;
+export const { makeLoggedInWithInfo, makeLoggedOut } = authSlice.actions;
 export const authReducer = authSlice.reducer;

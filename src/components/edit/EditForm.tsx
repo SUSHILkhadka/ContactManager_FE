@@ -1,18 +1,17 @@
-import { Button, Form, Input, message } from 'antd';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { makeLoggedOut } from '../../redux_toolkit/slices/authSlice';
-import { RootState } from '../../redux_toolkit/stores/store';
-import { editUser } from '../../services/backendCallUser';
-import {
-  saveAccessToken,
-  saveLoginResponse,
-  saveRefreshToken,
-  setLogStatus,
-} from '../../services/localStorageAndCookies';
-import '../styles/Form.css';
+import { Button, Form, Input, message } from "antd";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { makeLoggedOut } from "../../redux_toolkit/slices/authSlice";
+import { RootState } from "../../redux_toolkit/stores/store";
+import { editUser } from "../../services/backendCallUser";
+import { saveLoginResponse } from "../../services/localStorageAndCookies";
+import { getEditBodyFromForm } from "../../utils/converter";
+import editUserSchema from "../../validations/editUserSchema";
+import Validator from "../../validations/Validator";
+import "../styles/Form.css";
 const EditForm: React.FC = () => {
+  const [loading, setloading] = useState(false);
   const authInfo = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,73 +22,84 @@ const EditForm: React.FC = () => {
   };
 
   const onFinish = async (values: any) => {
-    if (values.newPassword1 === values.newPassword2) {
-      const body = JSON.stringify({
-        name: values.name,
-        password: values.newPassword1,
-        oldPassword: values.oldPassword,
-      });
+    setloading(true);
+    const body = getEditBodyFromForm(values)
+    try {
+      Validator(body, editUserSchema);
+      const response = await editUser(body);
 
-      try {
-        const response = await editUser(body);
-
-        message.success(`${response.message}`);
-        dispatch(makeLoggedOut());
-        setLogStatus(false);
-        saveLoginResponse('');
-        saveAccessToken('');
-        saveRefreshToken('');
-        navigate('/login', { replace: true });
-      } catch (e: any) {
-        message.error('error editing!! ' + e.response.data.message);
-      }
-    } else {
-      message.error(`new password and retype new password must match`);
+      message.success(response.message);
+      dispatch(makeLoggedOut());
+      saveLoginResponse("");
+      navigate("/login", { replace: true });
+    } catch (e: any) {
+      if (e.response) message.error(e.response.data.message);
+      else message.error(e);
     }
+
+    setloading(false);
   };
 
   return (
-    <div className="form form-edit">
+    <div className="form-container2">
       <Form
         name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
         initialValues={initialValue}
         onFinish={onFinish}
         autoComplete="off"
+        layout="vertical"
+        className="form-antd-form"
       >
-        <Form.Item label="Email" name="email">
+        <Form.Item 
+          className="form-single "
+
+         label="Email" name="email">
           <Input className="form-input" disabled />
         </Form.Item>
-        <Form.Item label="User Name" name="name" rules={[{ required: true, message: 'Please input your username!' }]}>
+        <Form.Item
+          className="form-single "
+
+          label="User Name"
+          name="name"
+          rules={[{ required: true, message: "Please input your username!" }]}
+        >
           <Input className="form-input" />
         </Form.Item>
 
         <Form.Item
+          className="form-single "
           label="Old Password"
           name="oldPassword"
-          rules={[{ required: true, message: 'Please input your password!' }]}
+          rules={[{ required: true, message: "Please input your password!" }]}
         >
           <Input.Password className="form-input" />
         </Form.Item>
 
         <Form.Item
+          className="form-single "
           label="New Password"
           name="newPassword1"
-          rules={[{ required: true, message: 'Please input your password!' }]}
+          rules={[{ required: true, message: "Please input your password!" }]}
         >
           <Input.Password className="form-input" />
         </Form.Item>
         <Form.Item
+          className="form-single "
           label="Retype New Password"
           name="newPassword2"
-          rules={[{ required: true, message: 'Please input your password!' }]}
+          rules={[{ required: true, message: "Please input your password!" }]}
         >
           <Input.Password className="form-input" />
         </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button className="btn" type="primary" htmlType="submit">
+        <Form.Item  className="form-button-register">
+          <Button
+          
+            className="btn"
+            type="primary"
+            htmlType="submit"
+            loading={loading}
+          >
             Confirm Changes
           </Button>
         </Form.Item>

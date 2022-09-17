@@ -1,13 +1,16 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { authReducer } from '../slices/authSlice';
-import { contactReducer } from '../slices/contactSlice';
-import { pageReducer } from '../slices/pageSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import { authReducer } from "../slices/authSlice";
+import { contactReducer } from "../slices/contactSlice";
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     contact: contactReducer,
-    page: pageReducer,
   },
+  //if dispatch isnot receiving action.payload proper in proper format
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

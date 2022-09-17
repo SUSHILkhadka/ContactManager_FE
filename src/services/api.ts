@@ -1,6 +1,11 @@
-import axios from 'axios';
-import { URL_TO_BACKEND } from '../constants/common';
-import { getAccessToken, getRefreshToken, saveAccessToken } from './localStorageAndCookies';
+import axios from "axios";
+import { URL_TO_BACKEND } from "../constants/common";
+import {
+  getAccessToken,
+  getRefreshToken,
+  saveAccessToken,
+  saveLoginResponse,
+} from "./localStorageAndCookies";
 
 /**
  * axios instane is create with given base url and headers type
@@ -8,9 +13,8 @@ import { getAccessToken, getRefreshToken, saveAccessToken } from './localStorage
 const instance = axios.create({
   baseURL: URL_TO_BACKEND,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
-
 });
 
 /**
@@ -18,7 +22,8 @@ const instance = axios.create({
  */
 instance.interceptors.request.use(
   (config) => {
-    if (config.headers) config.headers['Authorization'] = 'Bearer ' + getAccessToken();
+    if (config.headers)
+      config.headers["Authorization"] = "Bearer " + getAccessToken();
     return config;
   },
   (error) => {
@@ -40,13 +45,12 @@ instance.interceptors.response.use(
       if (
         err.response.status === 401 &&
         !originalConfig._retry &&
-        err.response.data.message === 'invalid access token'
+        err.response.data.message === "invalid access token"
       ) {
         // Access Token was expired
-
         originalConfig._retry = true;
         try {
-          const rs = await instance.post('/token', {
+          const rs = await instance.post("/token", {
             refreshToken: getRefreshToken(),
           });
           const { accessToken } = rs.data;
@@ -55,6 +59,13 @@ instance.interceptors.response.use(
         } catch (_error) {
           return Promise.reject(_error);
         }
+      } else if (
+        err.response.status === 401 &&
+        !originalConfig._retry &&
+        err.response.data.message === "invalid refresh token"
+      ) {
+        //refresh token was invalid
+        saveLoginResponse("");
       }
     }
     return Promise.reject(err);
