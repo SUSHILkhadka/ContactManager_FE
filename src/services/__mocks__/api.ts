@@ -1,46 +1,6 @@
-export const contactArray = [
-  {
-    id: 1,
-    name: "a",
-    email: "string",
-    workNumber: "string",
-    homeNumber: "string",
-    phoneNumber: "string",
-    favourite: true,
-    photograph: "string",
-  },
-  {
-    id: 2,
-    name: "b",
-    email: "string",
-    workNumber: "string",
-    homeNumber: "string",
-    phoneNumber: "string",
-    favourite: false,
-    photograph: "string",
-  },
-  {
-    id: 3,
-    name: "x",
-    email: "string",
-    workNumber: "string",
-    homeNumber: "string",
-    phoneNumber: "string",
-    favourite: true,
-    photograph: "string",
-  },
-];
-
-
+import { contactArray } from "../../constants/common";
 module.exports = {
   post: (url: string, body: any = "without any body") => {
-    return {
-      data: {
-        data: body,
-      },
-    };
-  },
-  put: (url: string, body: any) => {
     return {
       data: {
         data: body,
@@ -51,6 +11,20 @@ module.exports = {
     return {
       data: {
         data: contactArray,
+      },
+    };
+  },
+  put: (url: string, body: any) => {
+    return {
+      data: {
+        data: body,
+      },
+    };
+  },
+  delete: (url: string, body: any = "without any body") => {
+    return {
+      data: {
+        data: body,
       },
     };
   },

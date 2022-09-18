@@ -1,13 +1,13 @@
-import React from "react"
-import { DownOutlined } from "@ant-design/icons";
-import { Dropdown, Menu, Space, Typography } from "antd";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { IContact } from "../../interface/IContact";
+import { DownOutlined } from '@ant-design/icons';
+import { Dropdown, Menu, Space, Typography } from 'antd';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { IContact } from '../../interface/IContact';
 import {
   sortByAscendingFavouritesFirstThenRest,
   sortByAscendingFavouritesOnly,
   sortByDescendingAll,
-} from "../../utils/sort";
+} from '../../utils/sort';
+import React from 'react';
 
 type PropType = {
   dataOriginal: IContact[];
@@ -68,22 +68,22 @@ const CustomSort = ({ dataOriginal, setDataToDisplay }: PropType) => {
       defaultSelectedKeys={[`${sortMethodId}`]}
       items={[
         {
-          key: "0",
+          key: '0',
           label: <div>ascendingAll</div>,
           onClick: switchToAscendingAll,
         },
         {
-          key: "1",
+          key: '1',
           label: <div>descendingAll</div>,
           onClick: switchToDescendingAll,
         },
         {
-          key: "2",
+          key: '2',
           label: <div>ascendingFavouritesOnly</div>,
           onClick: switchToAscendingFavouritesOnly,
         },
         {
-          key: "3",
+          key: '3',
           label: <div>ascendingFavouritesFirstThenRest</div>,
           onClick: switchToAscendingFavouritesFirstThenRest,
         },
@@ -93,7 +93,7 @@ const CustomSort = ({ dataOriginal, setDataToDisplay }: PropType) => {
   return (
     <Dropdown overlay={menu}>
       <Typography.Link>
-        <Space className="dropdown-title">
+        <Space className='dropdown-title'>
           Sort By
           <DownOutlined />
         </Space>

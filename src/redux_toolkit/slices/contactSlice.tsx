@@ -1,19 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IContact } from "../../interface/IContact";
+import { createSlice } from '@reduxjs/toolkit';
+import { IContact } from '../../interface/IContact';
 
 const defaultValue: IContact = {
   id: 0,
-  name: "",
-  email: "",
-  workNumber: "",
-  homeNumber: "",
-  phoneNumber: "",
+  name: '',
+  email: '',
+  workNumber: '',
+  homeNumber: '',
+  phoneNumber: '',
   favourite: false,
-  photograph: "",
+  photograph: '',
 };
 
 export const contactSlice = createSlice({
-  name: "contactInfo",
+  name: 'contactInfo',
   initialState: defaultValue,
   reducers: {
     load: (state, action) => {
@@ -28,13 +28,13 @@ export const contactSlice = createSlice({
     },
     reset: (state: IContact) => {
       state.id = 0;
-      state.name = "";
-      state.email = "";
-      state.workNumber = "";
-      state.homeNumber = "";
-      state.phoneNumber = "";
+      state.name = '';
+      state.email = '';
+      state.workNumber = '';
+      state.homeNumber = '';
+      state.phoneNumber = '';
       state.favourite = false;
-      state.photograph = "";
+      state.photograph = '';
     },
     changePhotoUrl: (state, action) => {
       state.photograph = action.payload;

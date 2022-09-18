@@ -1,4 +1,4 @@
-import { IContact } from "../interface/IContact";
+import { IContact } from '../interface/IContact';
 
 export const sortByAscendingAll = (dataOriginal: IContact[]) => {
   const temp = JSON.parse(JSON.stringify(dataOriginal));
