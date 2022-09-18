@@ -33,3 +33,4 @@ export const contactArray = [
     photograph: 'string',
   },
 ];
+
