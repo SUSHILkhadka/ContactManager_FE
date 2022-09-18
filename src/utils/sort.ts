@@ -1,7 +1,7 @@
-import { IContact } from "../interface/IContact";
+import { IContact } from '../interface/IContact';
 
 export const sortByAscendingAll = (dataOriginal: IContact[]) => {
-  const temp = Object.create(dataOriginal);
+  const temp = JSON.parse(JSON.stringify(dataOriginal));
   temp.sort(function (a: IContact, b: IContact) {
     const keyA = a.name;
     const keyB = b.name;
@@ -11,9 +11,8 @@ export const sortByAscendingAll = (dataOriginal: IContact[]) => {
   });
   return temp;
 };
-
 export const sortByDescendingAll = (dataOriginal: IContact[]) => {
-  const temp = Object.create(dataOriginal);
+  const temp = JSON.parse(JSON.stringify(dataOriginal));
   temp.sort(function (a: IContact, b: IContact) {
     const keyA = a.name;
     const keyB = b.name;
@@ -25,19 +24,19 @@ export const sortByDescendingAll = (dataOriginal: IContact[]) => {
 };
 
 export const sortByAscendingFavouritesOnly = (dataOriginal: IContact[]) => {
-  const temp = dataOriginal;
   const listOfFavourite: IContact[] = [];
-  temp.forEach((element: IContact) => {
+  dataOriginal.forEach((element: IContact) => {
     if (element.favourite) listOfFavourite.push(element);
   });
   return listOfFavourite;
 };
 
-export const sortByAscendingFavouritesFirstThenRest = (dataOriginal: IContact[]) => {
-  const temp = dataOriginal;
+export const sortByAscendingFavouritesFirstThenRest = (
+  dataOriginal: IContact[]
+) => {
   const listOfFavourite: IContact[] = [];
   const listofNonFavourite: IContact[] = [];
-  temp.forEach((element: IContact) => {
+  dataOriginal.forEach((element: IContact) => {
     if (element.favourite) listOfFavourite.push(element);
     if (!element.favourite) listofNonFavourite.push(element);
   });

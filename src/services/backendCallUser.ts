@@ -1,4 +1,4 @@
-import api from "./api";
+import api from './api';
 
 /**
  *
@@ -6,7 +6,7 @@ import api from "./api";
  * @returns response from server
  */
 export async function login(body: any): Promise<any> {
-  const response = await api.post("/login", body);
+  const response = await api.post('/login', body);
   return response.data;
 }
 
@@ -16,7 +16,7 @@ export async function login(body: any): Promise<any> {
  * @returns response from server
  */
 export async function register(body: any): Promise<any> {
-  const response = await api.post("/register", body);
+  const response = await api.post('/register', body);
   return response.data;
 }
 
@@ -25,7 +25,7 @@ export async function register(body: any): Promise<any> {
  * @returns response after logout request
  */
 export async function logout(): Promise<any> {
-  const response = await api.post("/logout");
+  const response = await api.post('/logout');
   return response.data;
 }
 
@@ -34,8 +34,7 @@ export async function logout(): Promise<any> {
  * @param body request's body for editing user
  * @returns response from server
  */
-
 export async function editUser(body: any): Promise<any> {
-  const response = await api.put("/user", body);
+  const response = await api.put('/user', body);
   return response.data;
 }

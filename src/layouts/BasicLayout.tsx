@@ -4,20 +4,19 @@ import {
   PieChartOutlined,
   SettingOutlined,
   UserAddOutlined,
-} from "@ant-design/icons";
-import { Layout, Menu, MenuProps, message, Modal } from "antd";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import { makeLoggedOut } from "../redux_toolkit/slices/authSlice";
-import { reset } from "../redux_toolkit/slices/contactSlice";
-import { logout } from "../services/backendCallUser";
-import { saveLoginResponse } from "../services/localStorageAndCookies";
-import "./Layout.css";
+} from '@ant-design/icons';
+import { Layout, Menu, MenuProps, message, Modal } from 'antd';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { makeLoggedOut } from '../redux_toolkit/slices/authSlice';
+import { reset } from '../redux_toolkit/slices/contactSlice';
+import { logout } from '../services/backendCallUser';
+import { saveLoginResponse } from '../services/localStorageAndCookies';
+import './Layout.css';
 
 const { Content, Footer, Sider } = Layout;
-
-type MenuItem = Required<MenuProps>["items"][number];
+type MenuItem = Required<MenuProps>['items'][number];
 
 function getItem(
   label: React.ReactNode,
@@ -42,20 +41,20 @@ const App: React.FC = () => {
 
   const items: MenuItem[] = [
     getItem(
-      "Create New Contact",
-      "3",
-      () => navigate("/add"),
+      'Create New Contact',
+      '3',
+      () => navigate('/add'),
       <UserAddOutlined />
     ),
-    getItem("Contacts", "2", () => navigate("/list"), <ContactsFilled />),
+    getItem('Contacts', '2', () => navigate('/list'), <ContactsFilled />),
     getItem(
-      "Settings",
-      "4",
-      () => navigate("/settings"),
+      'Settings',
+      '4',
+      () => navigate('/settings'),
       <SettingOutlined spin />
     ),
-    getItem("About", "1", () => navigate("/about"), <PieChartOutlined />),
-    getItem("Logout", "6", () => showModal(), <LogoutOutlined />),
+    getItem('About', '1', () => navigate('/about'), <PieChartOutlined />),
+    getItem('Logout', '6', () => showModal(), <LogoutOutlined />),
   ];
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -70,12 +69,12 @@ const App: React.FC = () => {
     dispatch(reset());
     try {
       const res = await logout();
-      message.success(msg + "logged out successfully");
-      navigate("/login", { replace: true });
+      message.success(msg + 'logged out successfully');
+      navigate('/login', { replace: true });
     } catch (e) {
-      message.error("couldnot logout properly");
+      message.error('couldnot logout properly');
     }
-    saveLoginResponse("");
+    saveLoginResponse('');
   };
 
   const handleCancel = () => {
@@ -83,32 +82,28 @@ const App: React.FC = () => {
   };
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: '100vh' }}>
       <Sider
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
-        <div className="logo" />
-        <Menu
-          theme="dark"
-          mode="inline"
-          items={items}
-        />
+        <div className='logo' />
+        <Menu theme='dark' mode='inline' items={items} />
       </Sider>
-      <Layout className="site-layout">
-        <Content style={{ margin: "0.5rem 1rem" }}>
+      <Layout className='site-layout'>
+        <Content style={{ margin: '0.5rem 1rem' }}>
           <Outlet />
         </Content>
 
-        <Footer style={{ textAlign: "center" }}>
+        <Footer style={{ textAlign: 'center' }}>
           Contact Management ©2022
         </Footer>
       </Layout>
       <Modal
-        title="Logout"
+        title='Logout'
         visible={isModalVisible}
-        onOk={() => handleOk("")}
+        onOk={() => handleOk('')}
         onCancel={handleCancel}
       >
         <p>Are you sure you want to logout?</p>

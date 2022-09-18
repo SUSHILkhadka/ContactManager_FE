@@ -22,13 +22,8 @@
   box-shadow: -2px 4px 20px 16px firebrick;
   -webkit-box-shadow: -2px 4px 20 px 16px firebrick;
   -moz-box-shadow: -2px 4px 20px 16px firebrick;
-
   transition: all 0.2s;
 }
-/* .list-page{
-  display: flex;
-  flex-direction: column;
-} */
 
 .dropdown-menu {
 display: flex;
