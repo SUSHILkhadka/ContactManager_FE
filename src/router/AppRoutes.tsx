@@ -8,6 +8,7 @@ import { EditContactPage } from "../pages/contact/EditContactPage";
 import { ListContactPage } from "../pages/contact/ListContactsPage";
 import { EditPage } from "../pages/edit/EditPage";
 import { LoginPage } from "../pages/login/LoginPage";
+import NotFoundScreen from "../pages/NotFounScreen";
 import { RegisterPage } from "../pages/register/RegisterPage";
 import SplashScreen from "../pages/SplashScreen";
 import { checkToken } from "../redux_toolkit/slices/authSlice";
@@ -37,7 +38,7 @@ function AppRoutes() {
               ["/", "/list", "/add", "edit", "/settings"],
               <Navigate to="/login" />
             )}
-            <Route path="*" element={<div>Not found</div>} />
+            <Route path="*" element={<NotFoundScreen />} />
           </>
         ) : (
           <Route path="/" element={<ProtectedRoutes />}>
@@ -53,7 +54,7 @@ function AppRoutes() {
               ["/login", "register"],
               <Navigate to="/list" />
             )}
-            <Route path="*" element={<div>Not found</div>} />
+            <Route path="*" element={<NotFoundScreen />} />
           </Route>
         )}
       </Routes>

@@ -11,7 +11,7 @@ import {
 import type { ColumnsType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
 import { ColumnType } from "antd/lib/table";
-import { useRef, useState } from "react";
+import React,{ useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -58,16 +58,16 @@ const ContactsTable = (props: propsTypeforContactTable) => {
       favourite: Obj.favourite,
     };
     dispatch(load(dataForContactInfo));
-    navigate("/edit")
+    navigate("/edit");
   };
 
   const handleFavouriteChange = async (Obj: IContact) => {
     const body = {
       name: Obj.name,
       email: Obj.email,
-      workNumber: Obj.workNumber?Obj.workNumber:"",
-      homeNumber: Obj.homeNumber?Obj.homeNumber:"",
-      phoneNumber: Obj.phoneNumber?Obj.phoneNumber:"",
+      workNumber: Obj.workNumber ? Obj.workNumber : "",
+      homeNumber: Obj.homeNumber ? Obj.homeNumber : "",
+      phoneNumber: Obj.phoneNumber ? Obj.phoneNumber : "",
       photograph: Obj.photograph,
       favourite: !Obj.favourite,
     };
@@ -181,7 +181,7 @@ const ContactsTable = (props: propsTypeforContactTable) => {
         text
       ),
   });
-const width="10%"
+  const width = "10%";
   const columns: ColumnsType<IContact> = [
     {
       title: "Photograph",

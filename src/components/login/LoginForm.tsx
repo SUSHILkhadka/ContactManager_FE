@@ -47,11 +47,9 @@ const LoginForm: React.FC = () => {
         autoComplete="off"
         layout="vertical"
         className="form-antd-form"
-
       >
         <Form.Item
           className="form-single "
-
           label="Email"
           name="email"
           rules={[
