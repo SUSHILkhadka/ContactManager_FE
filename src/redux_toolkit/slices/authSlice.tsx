@@ -19,6 +19,7 @@ export const checkToken = createAsyncThunk(
     return response.data;
   }
 );
+
 export const authSlice = createSlice({
   name: 'authInfo',
   initialState: defaultValue,

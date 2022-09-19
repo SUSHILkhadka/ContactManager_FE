@@ -34,7 +34,6 @@ export const ListContactPage: React.FC = () => {
       }
       setLoading(false);
     };
-
     getalldata();
 
     return () => {
