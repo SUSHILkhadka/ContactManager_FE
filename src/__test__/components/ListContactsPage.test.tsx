@@ -1,4 +1,4 @@
-import "@testing-library/jest-dom"; //important to toBeInDocument() to run
+import "@testing-library/jest-dom"; // to run toBeInDocument()
 import { act } from "react-dom/test-utils";
 import { ListContactPage } from "../../pages/contact/ListContactsPage";
 import "../../__mocks__/matchMedia";

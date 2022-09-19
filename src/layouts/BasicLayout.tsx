@@ -51,7 +51,7 @@ const App: React.FC = () => {
       'Settings',
       '4',
       () => navigate('/settings'),
-      <SettingOutlined spin />
+      <SettingOutlined />
     ),
     getItem('About', '1', () => navigate('/about'), <PieChartOutlined />),
     getItem('Logout', '6', () => showModal(), <LogoutOutlined />),

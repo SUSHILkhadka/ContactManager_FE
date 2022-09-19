@@ -1,4 +1,5 @@
 import api from './api';
+import { getRefreshToken } from './localStorageAndCookies';
 
 /**
  *
@@ -25,7 +26,9 @@ export async function register(body: any): Promise<any> {
  * @returns response after logout request
  */
 export async function logout(): Promise<any> {
-  const response = await api.post('/logout');
+  const response = await api.post('/logout', {
+    refreshToken: getRefreshToken(),
+  });
   return response.data;
 }
 
