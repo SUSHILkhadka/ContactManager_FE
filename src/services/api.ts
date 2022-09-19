@@ -11,8 +11,7 @@ import {
  * axios instane is create with given base url and headers type
  */
 const instance = axios.create({
-  // baseURL: process.env.REACT_APP_URL_TO_BACKEND,
-  baseURL: URL_TO_BACKEND,
+  baseURL: process.env.REACT_APP_URL_TO_BACKEND,
   headers: {
     'Content-Type': 'application/json',
   },
